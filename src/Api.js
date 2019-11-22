@@ -1,0 +1,1 @@
+export const API_BASE = 'https://tugvaapi.tugva.org/api/Login/Login';
