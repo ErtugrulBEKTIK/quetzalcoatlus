@@ -45,7 +45,7 @@ export default class ContactDetail extends Component {
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.title}>Departman</Text>
-              <Text>{T.capitalizeWord(Department)}</Text>
+              <Text>{T.capitalizeFirstLetter(Department)}</Text>
             </View>
           </View>
           <View style={styles.itemContainer}>
@@ -56,7 +56,7 @@ export default class ContactDetail extends Component {
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.title}>Görev</Text>
-              <Text>{T.capitalizeWord(Title)}</Text>
+              <Text>{T.capitalizeFirstLetter(Title)}</Text>
             </View>
           </View>
           <View style={styles.itemContainer}>

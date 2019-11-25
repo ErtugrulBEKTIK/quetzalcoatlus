@@ -1,0 +1,4 @@
+module.exports = {
+  API_BASE: 'https://www.tecrubepaylasim.org/api/',
+  API_KEY: '98B46602-DA8F-4DC8-9E71-6D8ABB9A2DFF'
+};

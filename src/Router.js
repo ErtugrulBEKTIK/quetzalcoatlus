@@ -12,13 +12,26 @@ import DrawerMenu from './components/DrawerMenu';
 
 import Redirector from './screens/AuthStack/Redirector';
 
-// Stacks
+// Stacks & Screens
 import AuthStack from './screens/AuthStack';
 import HomeStack from './screens/HomeStack';
 import ContactStack from './screens/ContactStack';
+import DocumentStack from './screens/DocumentStack';
+import ProfileStack from './screens/ProfileStack';
+import AnnouncementStack from './screens/AnnouncementStack';
 
 
 const App = createDrawerNavigator({
+  Profile: {
+    screen: ProfileStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Profil',
+      headerLeft: <DrawerButton navigation={navigation} />,
+      drawerIcon: ({ tintColor }) => (
+        <Icon style={{color: tintColor, fontSize: 25}} name='contact' />
+      ),
+    })
+  },
   Home: {
     screen: HomeStack,
     navigationOptions: ({ navigation }) => ({
@@ -30,11 +43,22 @@ const App = createDrawerNavigator({
     })
   },
   Contacts: {
-    screen: ContactStack,navigationOptions: ({ navigation }) => ({
+    screen: ContactStack,
+    navigationOptions: ({ navigation }) => ({
       title: 'Rehber',
       headerLeft: <DrawerButton navigation={navigation} />,
       drawerIcon: ({ tintColor }) => (
         <Icon style={{color: tintColor, fontSize: 25}} name='contacts' />
+      ),
+    })
+  },
+  Documents: {
+    screen: DocumentStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Belgeler',
+      headerLeft: <DrawerButton navigation={navigation} />,
+      drawerIcon: ({ tintColor }) => (
+        <Icon style={{color: tintColor, fontSize: 25}} name='document' />
       ),
     })
   }

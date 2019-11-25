@@ -11,6 +11,7 @@
     "axios": "^0.19.0",
     "formik": "^2.0.4",
     "jetifier": "^1.6.4",
+    "lodash": "^4.17.15",
     "mobx": "^5.15.0",
     "mobx-react": "^5.4.3",
     "native-base": "^2.13.8",

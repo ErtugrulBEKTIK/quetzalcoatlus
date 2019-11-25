@@ -1,21 +1,36 @@
 import {observable, action} from 'mobx';
 import AsyncStorage from '@react-native-community/async-storage';
+import axios from '../Api';
+import { API_KEY } from '../../config';
 
 // navigation service
 import NavigationService from '../NavigationService';
 
-class AuthStore{
-  @observable token = null;
-  @observable user = {
-    Name: '',
-    Eposta: '',
-    ProfilResmi: 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png',
-  };
+const defaultUser = {
+  Name: '',
+  Eposta: '',
+  ProfilResmi: 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png',
+};
 
-  @action async saveUser(auth){
+const defaultToken = {
+  Username: '',
+  tokenkey: '',
+};
+
+class AuthStore{
+  @observable token = defaultToken;
+  @observable user = defaultUser;
+
+  @action async saveUser(username, user){
     try{
-      await AsyncStorage.setItem('token', auth.Tokenkey);
-      await AsyncStorage.setItem('user', JSON.stringify(auth));
+      const token = {
+        Username: username,
+        apikey: API_KEY,
+        tokenkey: user.Tokenkey,
+      };
+
+      await AsyncStorage.setItem('token', JSON.stringify(token));
+      await AsyncStorage.setItem('user', JSON.stringify(user));
       await this.setupAuth();
     }catch (e) {
       console.log(e);
@@ -26,27 +41,33 @@ class AuthStore{
     try{
       await AsyncStorage.removeItem('token');
       await AsyncStorage.removeItem('user');
-      this.token = null;
-      this.user = null;
+      this.token = defaultToken;
       await this.setupAuth();
+      this.user = defaultUser;
+
     }catch (e) {
       console.log(e);
     }
   }
 
   @action async setupAuth(){
-    await this.getToken();
-    await this.getUser();
+    await this.setToken();
+    await this.setUser();
   }
 
-  @action async getToken(){
+  @action async setToken(){
     try{
-      const token = await AsyncStorage.getItem('token');
+      let token = await AsyncStorage.getItem('token');
+      token = JSON.parse(token);
       if (!token) {
         NavigationService.navigate('Auth');
         return false;
       }
 
+      axios.defaults.transformRequest = [(data) => {
+        const newData = {...token, ...data};
+        return JSON.stringify(newData);
+      }];
       this.token = token;
       NavigationService.navigate('App');
     }catch (e) {
@@ -54,16 +75,11 @@ class AuthStore{
     }
   }
 
-  @action async getUser(){
+  @action async setUser(){
     try{
       const user = await AsyncStorage.getItem('user');
-      if (!user) {
-        NavigationService.navigate('Auth');
-        return false;
-      }
-
       this.user = JSON.parse(user);
-      NavigationService.navigate('App');
+
     }catch (e) {
       console.log(e);
     }

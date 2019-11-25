@@ -3,17 +3,14 @@ import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import { Text, Icon } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import { T } from '../../../helpers'
+import {inject, observer} from 'mobx-react';
 
-export default class ContactDetail extends Component {
+@inject('AuthStore')
+export default class Profile extends Component {
 
-
-  constructor(props) {
-    super(props);
-    this.item = props.navigation.getParam('item');
-  }
 
   render() {
-    const { Name, Lastname, Email, Department, GSM, file, Title } = this.item;
+    const { Name, Eposta, ProfilResmi } = this.props.AuthStore.user;
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -27,10 +24,10 @@ export default class ContactDetail extends Component {
 
             </LinearGradient>
 
-            <Text style={styles.headerTitle}>{Name} {Lastname}</Text>
+            <Text style={styles.headerTitle}>{Name}</Text>
 
             <View style={styles.photoContainer}>
-              <Image source={{uri: file}} style={styles.photo}/>
+              <Image source={{uri: ProfilResmi}} style={styles.photo}/>
             </View>
 
           </View>
@@ -45,7 +42,7 @@ export default class ContactDetail extends Component {
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.title}>Departman</Text>
-              <Text>{T.capitalizeWord(Department)}</Text>
+              <Text>Koordinatörlük</Text>
             </View>
           </View>
           <View style={styles.itemContainer}>
@@ -56,7 +53,7 @@ export default class ContactDetail extends Component {
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.title}>Görev</Text>
-              <Text>{T.capitalizeWord(Title)}</Text>
+              <Text>Mühendis</Text>
             </View>
           </View>
           <View style={styles.itemContainer}>
@@ -67,7 +64,7 @@ export default class ContactDetail extends Component {
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.title}>GSM</Text>
-              <Text>{GSM}</Text>
+              <Text>05426833277</Text>
             </View>
           </View>
           <View style={styles.itemContainer}>
@@ -78,7 +75,7 @@ export default class ContactDetail extends Component {
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.title}>Email</Text>
-              <Text>{Email}</Text>
+              <Text>{Eposta}</Text>
             </View>
           </View>
         </View>

@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, FlatList, Image, TouchableOpacity, TextInput, ActivityIndicator} from 'react-native';
-import { Text } from 'native-base';
-import axios from 'axios';
+import {StyleSheet, View, FlatList, Image, TouchableOpacity, TextInput, ActivityIndicator, Text} from 'react-native';
+import {inject, observer} from "mobx-react";
+import _ from 'lodash';
+import axios from '../../../Api';
 import NavigationService from '../../../NavigationService';
+import { T } from '../../../helpers'
 
+@inject('AuthStore')
 export default class ContactList extends Component {
   state = {
     text: '',
@@ -22,18 +25,12 @@ export default class ContactList extends Component {
       loading: true,
     });
 
-    const { data: { results: contacts } } = await axios.get(`https://randomuser.me/api/?results=300&page=${this.state.page}`);
-    const users = [...this.state.allContacts, ...contacts];
-
-    if (this.state.refreshing) {
-      users.reverse();
-    }
+    const { data } = await axios.post('Personel/PersonelListesi');
 
     this.setState({
-      contacts: users,
-      allContacts: users,
+      contacts: _.sortBy(data, ['Name', 'Lastname']),
+      allContacts: data,
       loading: false,
-
     });
   };
 
@@ -45,10 +42,10 @@ export default class ContactList extends Component {
       >
         <Image
           style={styles.avatar}
-          source={{uri: item.picture.thumbnail}}/>
+          source={{uri: item.file}}/>
         <View style={styles.textContainer}>
-          <Text>{item.name.first} {item.name.last}</Text>
-          <Text style={styles.email}>{item.email}</Text>
+          <Text>{item.Name} {item.Lastname}</Text>
+          <Text style={styles.email}>{item.Email}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -56,9 +53,9 @@ export default class ContactList extends Component {
 
   searchFilter = text => {
     const newData = this.state.allContacts.filter(item => {
-      const listItem = `${item.name.first.toLowerCase()} ${item.name.last.toLowerCase()} ${item.location.state.toLowerCase()}`;
+      const listItem = `${T.toLowerCase(item.Name)} ${T.toLowerCase(item.Lastname)} ${T.toLowerCase(item.Email)}`;
 
-      return listItem.indexOf(text.toLowerCase()) > -1;
+      return listItem.indexOf(T.toLowerCase(text)) > -1;
     });
 
     this.setState({
@@ -101,7 +98,7 @@ export default class ContactList extends Component {
         ListFooterComponent={this.renderFooter}
         ListHeaderComponent={this.renderHeader()}
         renderItem={this.renderContactsItem}
-        keyExtractor={item => item.login.uuid}
+        keyExtractor={item => item.$id}
         data={this.state.contacts}
       />
     );

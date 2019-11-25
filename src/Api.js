@@ -1,1 +1,9 @@
-export const API_BASE = 'https://tugvaapi.tugva.org/api/Login/Login';
+import axios from 'axios';
+import { API_BASE, API_KEY } from '../config';
+
+export default axios.create({
+  baseURL: API_BASE,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});

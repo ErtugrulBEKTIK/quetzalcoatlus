@@ -3,37 +3,37 @@ import React, { Component } from 'react';
 import {Button, Label, Input, Item, Spinner, Text, Icon} from "native-base";
 import {Formik} from "formik";
 
-import {API_BASE} from '../../../Api';
+import axios from '../../../Api';
 import validations from './validations';
 
 
-import axios from 'axios';
 import {inject} from 'mobx-react';
 
 @inject('AuthStore')
 export default class SignInForm extends Component {
   _handleSubmit = async ({ username, password }, bag) => {
     try {
-      const { data } = await axios.post(`${API_BASE}/authenticate`,
+
+      const response = await axios.post('Login/Login',
         {
           Username: username,
           UserPass: password,
-          UserDeviceId: "0",
           apikey: '98B46602-DA8F-4DC8-9E71-6D8ABB9A2DFF'
         }
-        );
+      );
       bag.setSubmitting(false);
 
-      console.log(data);
-      if (!data) {
+      console.log(response);
+      if (!response.data) {
         alert('Giriş bilgileri hatalı.');
         return false;
       }
 
-      this.props.AuthStore.saveUser(data[0]);
+      this.props.AuthStore.saveUser(username, response.data[0]);
     }catch (e) {
       bag.setSubmitting(false);
-      bag.setErrors(e)
+      bag.setErrors(e);
+      console.log(e);
     }
   };
 
@@ -41,8 +41,8 @@ export default class SignInForm extends Component {
     return (
       <Formik
         initialValues={{
-          username: '',
-          password: ''
+          username: '1318',
+          password: '1234'
         }}
         onSubmit={this._handleSubmit}
         validationSchema={validations}

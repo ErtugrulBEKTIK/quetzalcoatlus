@@ -15,5 +15,3 @@ export default class Redirector extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({});

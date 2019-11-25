@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, SafeAreaView, TouchableOpacity, ImageBackground, FlatList} from 'react-native';
+import {StyleSheet, View, SafeAreaView, ImageBackground } from 'react-native';
 import { Content, Button, Text, Thumbnail} from 'native-base';
 
 import { DrawerItems } from 'react-navigation'
@@ -7,12 +7,18 @@ import { DrawerItems } from 'react-navigation'
 import {inject, observer} from 'mobx-react';
 
 @inject('AuthStore')
-@observer
 export default class DrawerMenu extends Component {
 
   render() {
-    const {Name, Eposta, ProfilResmi} = this.props.AuthStore.user;
-    console.log(ProfilResmi);
+    const {user} = this.props.AuthStore;
+    let Name, Eposta, ProfilResmi;
+
+    if(user){
+      Name = user.Name;
+      Eposta = user.Eposta;
+      ProfilResmi = user.ProfilResmi;
+    }
+
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground source={require('../assets/images/bg.jpg')} style={styles.profileContainer}>
