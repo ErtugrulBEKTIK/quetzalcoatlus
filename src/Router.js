@@ -52,6 +52,16 @@ const App = createDrawerNavigator({
       ),
     })
   },
+  Announcements: {
+    screen: AnnouncementStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Duyurular',
+      headerLeft: <DrawerButton navigation={navigation} />,
+      drawerIcon: ({ tintColor }) => (
+          <Icon style={{color: tintColor, fontSize: 25}} name='megaphone' />
+      ),
+    })
+  },
   Documents: {
     screen: DocumentStack,
     navigationOptions: ({ navigation }) => ({
@@ -63,7 +73,7 @@ const App = createDrawerNavigator({
     })
   }
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'Announcements',
   contentComponent: DrawerMenu,
   overlayColor: 'rgba(0,0,0,0.67)',
   contentOptions: {

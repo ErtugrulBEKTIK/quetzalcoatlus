@@ -43,11 +43,12 @@ export default class DocumentList extends Component {
         onPress={() => { Linking.openURL(Pdflink)}}
         style={ styles.itemContainer }
       >
-        <View style={styles.iconContainer}>
-          <Icon name="document" style={styles.icon} />
-        </View>
+
+        <Text style={styles.header}>Örnek Haber Başlığı</Text>
+
+
         <View style={styles.textContainer}>
-          <Text>{Paylaşım_Adı}</Text>
+          <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim incidunt neque sunt temporibus totam? Error mollitia porro quas repudiandae ut?</Text>
         </View>
       </TouchableOpacity>
     )
@@ -75,9 +76,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     flex: 1,
-    flexDirection: 'row',
-    paddingVertical: 20,
-    paddingRight: 10,
+    padding: 10,
     borderWidth: 1,
     backgroundColor: 'white',
     borderColor: '#eee',
@@ -85,20 +84,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 5
   },
-  iconContainer: {
-    flex: 1,
-    borderRightWidth: 1,
-    borderRightColor: '#ddd',
-    marginRight: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+  header: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5
   },
-  icon: {
-    color: '#b1e3d2'
-  },
+
   textContainer: {
-    flex: 4,
-    justifyContent: 'space-around',
     paddingVertical: 3
   },
   email: {
