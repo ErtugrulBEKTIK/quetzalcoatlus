@@ -78,8 +78,8 @@ const App = createDrawerNavigator({
   overlayColor: 'rgba(0,0,0,0.67)',
   contentOptions: {
     activeTintColor: '#fff',
-    inactiveTintColor: '#3492c7',
-    activeBackgroundColor: '#3492c7',
+    inactiveTintColor: '#48aec4',
+    activeBackgroundColor: '#48aec4',
     inactiveBackgroundColor: '#fff',
     iconContainerStyle: { marginRight: 0,}
   }

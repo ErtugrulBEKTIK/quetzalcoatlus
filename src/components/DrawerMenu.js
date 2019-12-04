@@ -21,13 +21,13 @@ export default class DrawerMenu extends Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <ImageBackground source={require('../assets/images/bg.jpg')} style={styles.profileContainer}>
+        <View style={styles.profileContainer}>
           <Thumbnail large source={{uri: ProfilResmi}} />
           <View style={styles.profileInfo}>
             <Text style={styles.name}>{Name}</Text>
             <Text style={styles.email}>{Eposta}</Text>
           </View>
-        </ImageBackground>
+        </View>
 
         <Content style={styles.menuContainer}>
           <DrawerItems {...this.props} />
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    backgroundColor: '#48aec4'
   },
   profileInfo:{
     height: 60,

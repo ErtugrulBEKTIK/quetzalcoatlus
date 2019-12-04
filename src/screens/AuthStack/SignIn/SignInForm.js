@@ -13,7 +13,6 @@ import {inject} from 'mobx-react';
 export default class SignInForm extends Component {
   _handleSubmit = async ({ username, password }, bag) => {
     try {
-
       const response = await axios.post('Login/Login',
         {
           Username: username,

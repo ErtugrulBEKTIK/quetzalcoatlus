@@ -11,7 +11,7 @@ const ContactStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Rehber',
       headerStyle: {
-        backgroundColor: '#4895ec',
+        backgroundColor: '#48aec4',
       },
       headerTintColor: '#fff',
       headerLeft: ({ tintColor }) => (
@@ -24,7 +24,7 @@ const ContactStack = createStackNavigator({
     navigationOptions: {
       title: '',
       headerStyle: {
-        backgroundColor: 'rgba(238,238,238,0)',
+        backgroundColor: 'rgba(0,0,0,0)',
         borderBottomWidth: 0,
         shadowColor: 'transparent',
         elevation: 0

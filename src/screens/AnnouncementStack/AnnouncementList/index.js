@@ -4,7 +4,7 @@ import {Icon} from 'native-base';
 import {inject} from "mobx-react";
 import _ from 'lodash';
 import axios from '../../../Api';
-import NavigationService from '../../../NavigationService';
+import { font } from '../../../helpers/tools';
 
 
 @inject('AuthStore')
@@ -47,9 +47,12 @@ export default class DocumentList extends Component {
         <Text style={styles.header}>Örnek Haber Başlığı</Text>
 
 
-        <View style={styles.textContainer}>
-          <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim incidunt neque sunt temporibus totam? Error mollitia porro quas repudiandae ut?</Text>
-        </View>
+        <Text style={styles.textContainer}>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim incidunt neque sunt temporibus totam? Error mollitia porro quas repudiandae ut?
+        </Text>
+        <Text style={styles.date}>
+          <Icon name='calendar' style={styles.calendarIcon}/> 12.09.2018
+        </Text>
       </TouchableOpacity>
     )
   };
@@ -72,11 +75,12 @@ export default class DocumentList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fcfcfc'
+    backgroundColor: '#fcfcfc',
+    paddingVertical: 15
   },
   itemContainer: {
     flex: 1,
-    padding: 10,
+    padding: 15,
     borderWidth: 1,
     backgroundColor: 'white',
     borderColor: '#eee',
@@ -85,23 +89,23 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   header: {
-    fontSize: 16,
+    fontSize: font(16),
     fontWeight: 'bold',
-    marginBottom: 5
+    marginBottom: 5,
+    color: '#3e95a8'
+  },
+  textContainer: {
+    paddingVertical: 3,
+    fontSize: font(12)
+  },
+  date: {
+    marginTop: 5,
+    fontSize: font(11),
+    color: '#606060'
+  },
+  calendarIcon: {
+    fontSize: font(14),
+    color: '#48aec4'
   },
 
-  textContainer: {
-    paddingVertical: 3
-  },
-  email: {
-    fontSize: 14
-  },
-  searchContainer: {
-    padding: 10
-  },
-  searchInput: {
-    fontSize: 16,
-    backgroundColor: '#f9f9f9',
-    padding: 10
-  }
 });

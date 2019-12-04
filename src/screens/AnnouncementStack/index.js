@@ -9,9 +9,9 @@ const AnnouncementStack = createStackNavigator({
   List: {
     screen: AnnouncementList,
     navigationOptions: ({ navigation }) => ({
-      title: 'Belgeler',
+      title: 'Duyurular',
       headerStyle: {
-        backgroundColor: '#4895ec',
+        backgroundColor: '#48aec4',
       },
       headerTintColor: '#fff',
       headerLeft: ({ tintColor }) => (
@@ -24,7 +24,7 @@ const AnnouncementStack = createStackNavigator({
     navigationOptions: {
       title: 'Detay',
       headerStyle: {
-        backgroundColor: '#4895ec',
+        backgroundColor: '#48aec4',
       },
       headerTintColor: '#fff',
     }

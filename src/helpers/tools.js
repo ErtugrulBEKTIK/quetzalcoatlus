@@ -1,3 +1,4 @@
+import { RFValue } from "react-native-responsive-fontsize";
 
 export function range(start, stop, step) {
   if (typeof stop == 'undefined') {
@@ -82,4 +83,8 @@ export function sef(text) {
               .replace(/[-]+/gi, "-") // trim repeated dashes
               .toLowerCase();
 
+}
+
+export function font(size) {
+  return RFValue(size)
 }

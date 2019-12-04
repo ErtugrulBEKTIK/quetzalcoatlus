@@ -18,7 +18,7 @@ export default class Profile extends Component {
             <LinearGradient
               start={{x: 0, y: 0}}
               end={{x: 1.5, y: 0.2}}
-              colors={['#4591ec', '#56c4e0', '#5cd6dc']}
+              colors={['#48aec4', '#74c2d2', '#a0d5e0']}
               style={styles.linearGradient}
             >
 
