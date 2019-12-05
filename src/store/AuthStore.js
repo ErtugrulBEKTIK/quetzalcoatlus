@@ -9,7 +9,7 @@ import NavigationService from '../NavigationService';
 const defaultUser = {
   Name: '',
   Eposta: '',
-  ProfilResmi: 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png',
+  ProfilResmi: '',
 };
 
 const defaultToken = {

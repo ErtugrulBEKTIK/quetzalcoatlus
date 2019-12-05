@@ -3,9 +3,10 @@ import {createStackNavigator} from "react-navigation";
 
 import Profile from './Profile';
 import DrawerButton from "../../components/DrawerButton";
+import {res} from "../../helpers";
 
 const ProfileStack = createStackNavigator({
-  List: {
+  Profile: {
     screen: Profile,
     navigationOptions: ({ navigation }) => ({
       title: 'Profil',
@@ -14,6 +15,9 @@ const ProfileStack = createStackNavigator({
         borderBottomWidth: 0,
         shadowColor: 'transparent',
         elevation: 0
+      },
+      headerTitleStyle: {
+        fontSize: res(16)
       },
       headerTintColor: '#fff',
       headerLeft: ({ tintColor }) => (

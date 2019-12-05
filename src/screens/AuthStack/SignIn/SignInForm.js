@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import {Button, Label, Input, Item, Spinner, Text, Icon} from "native-base";
 import {Formik} from "formik";
+import {res} from '../../../helpers';
 
 import axios from '../../../Api';
 import validations from './validations';
@@ -76,7 +77,7 @@ export default class SignInForm extends Component {
               <Item
                 error={errors.password && touched.password}
                 floatingLabel
-                style={{marginTop: 10}}
+                style={{marginTop: res(10)}}
               >
                 <Label>Şifre</Label>
                 <Input
@@ -96,10 +97,10 @@ export default class SignInForm extends Component {
                 block
                 disabled={!isValid || isSubmitting}
                 onPress={handleSubmit}
-                style={{marginTop: 30}}>
+                style={{marginTop: res(30)}}>
 
                 { isSubmitting && <Spinner size={'small'} color={'white'} /> }
-                <Text>Giriş Yap</Text>
+                <Text style={{fontSize: res(15)}}>Giriş Yap</Text>
               </Button>
 
 

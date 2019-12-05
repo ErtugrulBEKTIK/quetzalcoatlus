@@ -4,7 +4,8 @@ import {inject, observer} from "mobx-react";
 import _ from 'lodash';
 import axios from '../../../Api';
 import NavigationService from '../../../NavigationService';
-import { T } from '../../../helpers'
+import { T } from '../../../helpers';
+import s from './styles';
 
 @inject('AuthStore')
 export default class ContactList extends Component {
@@ -38,14 +39,14 @@ export default class ContactList extends Component {
     return (
       <TouchableOpacity 
         onPress={() => { NavigationService.navigate('Detail', {item}) }}
-        style={[styles.itemContainer, {backgroundColor: index % 2 === 1 ? '#fafafa' : ''}]}
+        style={[s.itemContainer, {backgroundColor: index % 2 === 1 ? '#fafafa' : ''}]}
       >
         <Image
-          style={styles.avatar}
+          style={s.avatar}
           source={{uri: item.file}}/>
-        <View style={styles.textContainer}>
-          <Text>{item.Name} {item.Lastname}</Text>
-          <Text style={styles.email}>{item.Email}</Text>
+        <View style={s.textContainer}>
+          <Text style={s.name}>{item.Name} {item.Lastname}</Text>
+          <Text style={s.email}>{T.toLowerCase(item.Email)}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -66,7 +67,7 @@ export default class ContactList extends Component {
   renderHeader = () => {
     const {text} = this.state;
     return (
-      <View style={styles.searchContainer}>
+      <View style={s.searchContainer}>
         <TextInput
           onChangeText={text => {
             this.setState({
@@ -76,7 +77,7 @@ export default class ContactList extends Component {
           }}
           value={text}
           placeholder="Ara..."
-          style={styles.searchInput}/>
+          style={s.searchInput}/>
       </View>
     )
   };
@@ -104,35 +105,3 @@ export default class ContactList extends Component {
     );
   }
 }
-
-
-const styles = StyleSheet.create({
-  itemContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee'
-  },
-  avatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginHorizontal: 10
-  },
-  textContainer: {
-    justifyContent: 'space-around',
-    paddingVertical: 3
-  },
-  email: {
-    fontSize: 14
-  },
-  searchContainer: {
-    padding: 10
-  },
-  searchInput: {
-    fontSize: 16,
-    backgroundColor: '#f9f9f9',
-    padding: 10
-  }
-});

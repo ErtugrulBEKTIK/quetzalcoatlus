@@ -4,6 +4,7 @@ import {createStackNavigator} from "react-navigation";
 import ContactList from './ContactList';
 import ContactDetail from './ContactDetail';
 import DrawerButton from "../../components/DrawerButton";
+import {res} from "../../helpers";
 
 const ContactStack = createStackNavigator({
   List: {
@@ -12,6 +13,9 @@ const ContactStack = createStackNavigator({
       title: 'Rehber',
       headerStyle: {
         backgroundColor: '#48aec4',
+      },
+      headerTitleStyle: {
+        fontSize: res(16)
       },
       headerTintColor: '#fff',
       headerLeft: ({ tintColor }) => (
@@ -28,6 +32,9 @@ const ContactStack = createStackNavigator({
         borderBottomWidth: 0,
         shadowColor: 'transparent',
         elevation: 0
+      },
+      headerTitleStyle: {
+        fontSize: res(16)
       },
       headerTintColor: '#fff',
     }

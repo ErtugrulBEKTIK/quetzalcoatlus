@@ -4,7 +4,7 @@ import {Icon} from 'native-base';
 import {inject} from "mobx-react";
 import _ from 'lodash';
 import axios from '../../../Api';
-import { font } from '../../../helpers/tools';
+import { res } from '../../../helpers';
 
 
 @inject('AuthStore')
@@ -89,22 +89,22 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   header: {
-    fontSize: font(16),
+    fontSize: res(16),
     fontWeight: 'bold',
     marginBottom: 5,
     color: '#3e95a8'
   },
   textContainer: {
     paddingVertical: 3,
-    fontSize: font(12)
+    fontSize: res(12)
   },
   date: {
     marginTop: 5,
-    fontSize: font(11),
+    fontSize: res(11),
     color: '#606060'
   },
   calendarIcon: {
-    fontSize: font(14),
+    fontSize: res(14),
     color: '#48aec4'
   },
 

@@ -1,4 +1,3 @@
-import { RFValue } from "react-native-responsive-fontsize";
 
 export function range(start, stop, step) {
   if (typeof stop == 'undefined') {
@@ -85,6 +84,3 @@ export function sef(text) {
 
 }
 
-export function font(size) {
-  return RFValue(size)
-}

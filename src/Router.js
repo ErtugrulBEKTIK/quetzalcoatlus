@@ -1,5 +1,6 @@
 import React from 'react';
 import {Icon} from "native-base";
+import { res } from './helpers';
 
 import {
   createAppContainer,
@@ -28,7 +29,7 @@ const App = createDrawerNavigator({
       title: 'Profil',
       headerLeft: <DrawerButton navigation={navigation} />,
       drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: 25}} name='contact' />
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='contact' />
       ),
     })
   },
@@ -38,7 +39,7 @@ const App = createDrawerNavigator({
       title: 'Anasayfa',
       headerLeft: <DrawerButton navigation={navigation} />,
       drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: 25}} name='home' />
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='home' />
       ),
     })
   },
@@ -48,7 +49,7 @@ const App = createDrawerNavigator({
       title: 'Rehber',
       headerLeft: <DrawerButton navigation={navigation} />,
       drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: 25}} name='contacts' />
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='contacts' />
       ),
     })
   },
@@ -58,7 +59,7 @@ const App = createDrawerNavigator({
       title: 'Duyurular',
       headerLeft: <DrawerButton navigation={navigation} />,
       drawerIcon: ({ tintColor }) => (
-          <Icon style={{color: tintColor, fontSize: 25}} name='megaphone' />
+          <Icon style={{color: tintColor, fontSize: res(25)}} name='megaphone' />
       ),
     })
   },
@@ -68,20 +69,24 @@ const App = createDrawerNavigator({
       title: 'Belgeler',
       headerLeft: <DrawerButton navigation={navigation} />,
       drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: 25}} name='document' />
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='document' />
       ),
     })
   }
 }, {
-  initialRouteName: 'Announcements',
+  initialRouteName: 'Home',
   contentComponent: DrawerMenu,
+  drawerWidth: res(250),
   overlayColor: 'rgba(0,0,0,0.67)',
   contentOptions: {
     activeTintColor: '#fff',
     inactiveTintColor: '#48aec4',
     activeBackgroundColor: '#48aec4',
     inactiveBackgroundColor: '#fff',
-    iconContainerStyle: { marginRight: 0,}
+    iconContainerStyle: { marginRight: 0, width: res(25)},
+    labelStyle: {
+      fontSize: res(14)
+    }
   }
 });
 

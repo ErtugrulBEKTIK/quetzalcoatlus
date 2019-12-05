@@ -4,8 +4,7 @@ import {Icon} from 'native-base';
 import {inject} from "mobx-react";
 import _ from 'lodash';
 import axios from '../../../Api';
-import NavigationService from '../../../NavigationService';
-
+import {res} from "../../../helpers";
 
 @inject('AuthStore')
 export default class DocumentList extends Component {
@@ -71,45 +70,36 @@ export default class DocumentList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fcfcfc'
+    backgroundColor: '#fcfcfc',
+    paddingVertical: res(20),
   },
   itemContainer: {
     flex: 1,
     flexDirection: 'row',
-    paddingVertical: 20,
-    paddingRight: 10,
+    paddingVertical: res(20),
+    paddingRight: res(10),
     borderWidth: 1,
     backgroundColor: 'white',
     borderColor: '#eee',
-    borderRadius: 5,
-    marginHorizontal: 20,
-    marginVertical: 5
+    borderRadius: res(5),
+    marginHorizontal: res(20),
+    marginVertical: res(5)
   },
   iconContainer: {
     flex: 1,
     borderRightWidth: 1,
     borderRightColor: '#ddd',
-    marginRight: 10,
+    marginRight: res(10),
     alignItems: 'center',
     justifyContent: 'center',
   },
   icon: {
-    color: '#b1e3d2'
+    color: '#b1e3d2',
+    fontSize: res(25)
   },
   textContainer: {
     flex: 4,
     justifyContent: 'space-around',
     paddingVertical: 3
-  },
-  email: {
-    fontSize: 14
-  },
-  searchContainer: {
-    padding: 10
-  },
-  searchInput: {
-    fontSize: 16,
-    backgroundColor: '#f9f9f9',
-    padding: 10
   }
 });

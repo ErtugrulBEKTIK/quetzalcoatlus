@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, SafeAreaView, ImageBackground } from 'react-native';
-import { Content, Button, Text, Thumbnail} from 'native-base';
-
+import {StyleSheet, View, SafeAreaView, ImageBackground, Image} from 'react-native';
+import { Button, Text, Thumbnail} from 'native-base';
+import { res } from '../helpers';
 import { DrawerItems } from 'react-navigation'
 
 import {inject, observer} from 'mobx-react';
@@ -11,69 +11,82 @@ export default class DrawerMenu extends Component {
 
   render() {
     const {user} = this.props.AuthStore;
-    let Name, Eposta, ProfilResmi;
+    let Name, Eposta, pp;
 
     if(user){
       Name = user.Name;
       Eposta = user.Eposta;
-      ProfilResmi = user.ProfilResmi;
+      pp = user.ProfilResmi;
     }
 
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.profileContainer}>
-          <Thumbnail large source={{uri: ProfilResmi}} />
-          <View style={styles.profileInfo}>
-            <Text style={styles.name}>{Name}</Text>
-            <Text style={styles.email}>{Eposta}</Text>
+      <View style={s.container}>
+        <SafeAreaView style={{ flex:1 }}>
+          <View style={s.profileContainer}>
+
+            <Image style={s.avatar} source={pp ? {uri: pp} : require('../assets/images/avatar.jpeg')}/>
+            <View style={s.profileInfo}>
+              <Text style={s.name}>{Name}</Text>
+              <Text style={s.email}>{Eposta}</Text>
+            </View>
+
+
           </View>
-        </View>
 
-        <Content style={styles.menuContainer}>
-          <DrawerItems {...this.props} />
-        </Content>
+          <View style={s.menuContainer}>
+            <DrawerItems {...this.props} />
+          </View>
 
-        <View style={styles.footer}>
-          <Button style={styles.footerText} block danger
-                  onPress={() => this.props.AuthStore.removeUser()}
-          >
-            <Text>Çıkış Yap</Text>
-          </Button>
-        </View>
-      </SafeAreaView>
+          <View style={s.footer}>
+            <Button block danger
+                    onPress={() => this.props.AuthStore.removeUser()}
+            >
+              <Text style={s.footerText}>Çıkış Yap</Text>
+            </Button>
+          </View>
+        </SafeAreaView>
+      </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const s = StyleSheet.create({
   container: {
     flex: 1,
   },
   profileContainer: {
-    height: 150,
-    paddingVertical: 40,
-    paddingHorizontal: 10,
+    flex: 1,
+    paddingVertical: res(20),
+    paddingHorizontal: res(10),
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#48aec4'
   },
   profileInfo:{
-    height: 60,
-    marginRight: 10,
+    height: res(60),
+    marginRight: res(10),
     justifyContent: 'space-around',
+  },
+  avatar: {
+    width: res(70),
+    height: res(70),
+    borderRadius: res(35),
+    marginHorizontal: res(10)
   },
   name:{
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: res(16),
     color: 'white',
   },
   email:{
     color: 'white',
-    fontSize: 12
+    fontSize: res(12)
   },
   menuContainer:{
-    paddingVertical: 20
+    flex: 6,
+    paddingVertical: 20,
+    backgroundColor: 'white'
   },
   menuItem: {
     flexDirection: 'row',
@@ -96,8 +109,6 @@ const styles = StyleSheet.create({
     padding: 20
   },
   footerText: {
-    textAlign: 'center',
-    color: '#999',
-    fontSize: 11
+    fontSize: res(15)
   }
 });
