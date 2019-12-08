@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
 
 import AnnounceSlide from './AnnounceSlide'
 import ShortCuts from './ShortCuts'
+import Info from './Info'
 
 export default class SignIn extends Component {
 
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <AnnounceSlide/>
         <ShortCuts/>
-      </View>
+        <Info/>
+      </SafeAreaView>
     );
   }
 }

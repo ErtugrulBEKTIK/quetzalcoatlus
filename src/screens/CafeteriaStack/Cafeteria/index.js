@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet, SafeAreaView, Text, ScrollView, TouchableOpacity, Linking} from 'react-native';
 import { T, res } from '../../../helpers'
 
-export default class AnnouncementDetail extends Component {
+export default class Cafeteria extends Component {
 
 
   constructor(props) {

@@ -23,26 +23,14 @@ export default class DrawerMenu extends Component {
       <View style={s.container}>
         <SafeAreaView style={{ flex:1 }}>
           <View style={s.profileContainer}>
-
             <Image style={s.avatar} source={pp ? {uri: pp} : require('../assets/images/avatar.jpeg')}/>
             <View style={s.profileInfo}>
               <Text style={s.name}>{Name}</Text>
               <Text style={s.email}>{Eposta}</Text>
             </View>
-
-
           </View>
-
           <View style={s.menuContainer}>
             <DrawerItems {...this.props} />
-          </View>
-
-          <View style={s.footer}>
-            <Button block danger
-                    onPress={() => this.props.AuthStore.removeUser()}
-            >
-              <Text style={s.footerText}>Çıkış Yap</Text>
-            </Button>
           </View>
         </SafeAreaView>
       </View>
@@ -100,15 +88,5 @@ const s = StyleSheet.create({
   },
   itemIcon: {
     marginRight: 15
-  },
-  footer: {
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    width: '100%',
-    padding: 20
-  },
-  footerText: {
-    fontSize: res(15)
   }
 });

@@ -1,8 +1,10 @@
 import React from "react";
+import {Platform} from "react-native";
 import {createStackNavigator} from "react-navigation";
 
 import Profile from './Profile';
 import DrawerButton from "../../components/DrawerButton";
+import ReturnButton from "../../components/ReturnButton";
 import {res} from "../../helpers";
 
 const ProfileStack = createStackNavigator({
@@ -21,6 +23,7 @@ const ProfileStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerLeft: ({ tintColor }) => (
+        Platform.OS === 'ios' ? <ReturnButton/> :
         <DrawerButton navigation={navigation} color={tintColor} />
       )
     })

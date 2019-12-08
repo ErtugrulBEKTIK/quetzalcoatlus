@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native';
 import {Icon} from 'native-base';
 import {res} from "../../../helpers";
 import NavigationService from "../../../NavigationService";
@@ -36,14 +36,16 @@ export default class ShortCuts extends Component {
             <Text style={s.text}>Belgeler</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => { NavigationService.navigate('Documents')}}
+            onPress={() => { NavigationService.navigate('Cafeteria')}}
             style={s.item}>
             <Icon type="MaterialIcons" name="restaurant" style={s.icon} />
             <Text style={s.text}>Yemekhane</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={s.item}>
-            <Icon type="MaterialIcons" name="info-outline" style={s.icon} />
-            <Text style={s.text}>Vakıf</Text>
+          <TouchableOpacity
+            onPress={() => { Linking.openURL('http://tugva.org/')}}
+            style={s.item}>
+            <Icon type="MaterialIcons" name="language" style={s.icon} />
+            <Text style={s.text}>Web Site</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -53,13 +55,14 @@ export default class ShortCuts extends Component {
 
 const s = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     padding: res(5),
   },
   row: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'stretch'
   },
   item: {
     flex: 1,
@@ -67,7 +70,7 @@ const s = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fcfcfc',
     borderWidth: 1,
-    borderColor: '#d7dee0',
+    borderColor: '#49aec3',
     margin: res(5),
     padding: res(15),
   },

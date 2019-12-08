@@ -3,17 +3,16 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import {Icon} from 'native-base';
 import {inject} from 'mobx-react';
 import { res } from '../helpers';
+import NavigationService from "../NavigationService";
 
-@inject('AuthStore')
 export default class LogoutButton extends Component {
   render() {
     return (
       <TouchableOpacity
-        onPress={() => this.props.AuthStore.removeUser()}
+        onPress={() => { NavigationService.navigate('Home')}}
         style={styles.buttonContainer}>
         <Icon style={styles.icon}
-              type="FontAwesome"
-              name="sign-out"
+              name="arrow-round-back"
         />
       </TouchableOpacity>
     );
@@ -22,10 +21,10 @@ export default class LogoutButton extends Component {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginRight: res(10)
+    marginLeft: res(10)
   },
   icon: {
-    fontSize: res(25),
+    fontSize: res(36),
     color: '#fff'
   }
 });

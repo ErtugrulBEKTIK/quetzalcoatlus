@@ -5,10 +5,11 @@ import {inject} from "mobx-react";
 import _ from 'lodash';
 import axios from '../../../Api';
 import { res } from '../../../helpers';
+import NavigationService from "../../../NavigationService";
 
 
 @inject('AuthStore')
-export default class DocumentList extends Component {
+export default class AnnouncementList extends Component {
   state = {
     text: '',
     page: 1,
@@ -32,15 +33,14 @@ export default class DocumentList extends Component {
     this.setState({
       documents: _.sortBy(data, ['Paylaşım_Adı']),
       loading: false,
-
     });
   };
 
   renderContactsItem = ({item, index}) => {
     const { Paylaşım_Adı, Hedef_Departmanlar, Pdflink } = item;
     return (
-      <TouchableOpacity 
-        onPress={() => { Linking.openURL(Pdflink)}}
+      <TouchableOpacity
+        onPress={() => { NavigationService.navigate('Detail', {item}) }}
         style={ styles.itemContainer }
       >
 

@@ -20,19 +20,10 @@ import ContactStack from './screens/ContactStack';
 import DocumentStack from './screens/DocumentStack';
 import ProfileStack from './screens/ProfileStack';
 import AnnouncementStack from './screens/AnnouncementStack';
+import CafeteriaStack from './screens/CafeteriaStack';
 
 
 const App = createDrawerNavigator({
-  Profile: {
-    screen: ProfileStack,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Profil',
-      headerLeft: <DrawerButton navigation={navigation} />,
-      drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='contact' />
-      ),
-    })
-  },
   Home: {
     screen: HomeStack,
     navigationOptions: ({ navigation }) => ({
@@ -43,6 +34,16 @@ const App = createDrawerNavigator({
       ),
     })
   },
+  Profile: {
+    screen: ProfileStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Profil',
+      headerLeft: <DrawerButton navigation={navigation} />,
+      drawerIcon: ({ tintColor }) => (
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='contact' />
+      ),
+    })
+  },
   Contacts: {
     screen: ContactStack,
     navigationOptions: ({ navigation }) => ({
@@ -50,6 +51,16 @@ const App = createDrawerNavigator({
       headerLeft: <DrawerButton navigation={navigation} />,
       drawerIcon: ({ tintColor }) => (
         <Icon style={{color: tintColor, fontSize: res(25)}} name='contacts' />
+      ),
+    })
+  },
+  Cafeteria: {
+    screen: CafeteriaStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Yemekhane',
+      headerLeft: <DrawerButton navigation={navigation} />,
+      drawerIcon: ({ tintColor }) => (
+        <Icon style={{color: tintColor, fontSize: res(25)}} type="MaterialIcons" name="restaurant" />
       ),
     })
   },
@@ -80,7 +91,7 @@ const App = createDrawerNavigator({
   overlayColor: 'rgba(0,0,0,0.67)',
   contentOptions: {
     activeTintColor: '#fff',
-    inactiveTintColor: '#48aec4',
+    inactiveTintColor: '#3897a7',
     activeBackgroundColor: '#48aec4',
     inactiveBackgroundColor: '#fff',
     iconContainerStyle: { marginRight: 0, width: res(25)},

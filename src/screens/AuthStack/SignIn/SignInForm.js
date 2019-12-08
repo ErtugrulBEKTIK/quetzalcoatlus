@@ -100,7 +100,7 @@ export default class SignInForm extends Component {
                 style={{marginTop: res(30)}}>
 
                 { isSubmitting && <Spinner size={'small'} color={'white'} /> }
-                <Text style={{fontSize: res(15)}}>Giriş Yap</Text>
+                <Text style={{fontSize: res(15)}}>GİRİŞ YAP</Text>
               </Button>
 
 

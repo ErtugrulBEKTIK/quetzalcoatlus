@@ -4,13 +4,14 @@ import { Text, Icon } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import {inject, observer} from 'mobx-react';
 import s from './styles';
+import {T} from "../../../helpers";
 
 @inject('AuthStore')
 export default class Profile extends Component {
 
 
   render() {
-    const { Name, Eposta, ProfilResmi } = this.props.AuthStore.user;
+    const { Name, Eposta, ProfilResmi, Koordinatorluk, Gorevi } = this.props.AuthStore.user;
     return (
       <View style={s.container}>
         <View style={s.header}>
@@ -36,42 +37,50 @@ export default class Profile extends Component {
         <View style={s.body}>
           <View style={s.itemContainer}>
             <View style={s.iconContainer}>
-              <Icon
-                style={[s.icon, {color: '#e6b2c9'}]}
-                name='git-network'/>
+              <View style={s.iconBorder}>
+                <Icon
+                  style={[s.icon, {color: '#e6b2c9'}]}
+                  name='git-network'/>
+              </View>
             </View>
             <View style={s.textContainer}>
               <Text style={s.title}>Departman</Text>
-              <Text>Koordinatörlük</Text>
+              <Text>{T.capitalizeWord(Koordinatorluk)}</Text>
             </View>
           </View>
           <View style={s.itemContainer}>
             <View style={s.iconContainer}>
-              <Icon
-                style={[s.icon, {color: '#eee2aa'}]}
-                name='briefcase'/>
+              <View style={s.iconBorder}>
+                <Icon
+                  style={[s.icon, {color: '#eee2aa'}]}
+                  name='briefcase'/>
+              </View>
             </View>
             <View style={s.textContainer}>
               <Text style={s.title}>Görev</Text>
-              <Text>Mühendis</Text>
+              <Text>{T.capitalizeWord(Gorevi)}</Text>
             </View>
           </View>
           <View style={s.itemContainer}>
             <View style={s.iconContainer}>
-              <Icon
-                style={[s.icon, {color: '#8cbeec'}]}
-                name='phone-portrait'/>
+              <View style={s.iconBorder}>
+                <Icon
+                  style={[s.icon, {color: '#8cbeec'}]}
+                  name='phone-portrait'/>
+              </View>
             </View>
             <View style={s.textContainer}>
               <Text style={s.title}>GSM</Text>
-              <Text>05426833277</Text>
+              <Text>050000000000</Text>
             </View>
           </View>
           <View style={s.itemContainer}>
             <View style={s.iconContainer}>
-              <Icon
-                style={[s.icon, {color: '#b1e3d2'}]}
-                name='mail'/>
+              <View style={s.iconBorder}>
+                <Icon
+                  style={[s.icon, {color: '#b1e3d2'}]}
+                  name='mail'/>
+              </View>
             </View>
             <View style={s.textContainer}>
               <Text style={s.title}>Email</Text>

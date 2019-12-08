@@ -7,6 +7,7 @@ import AnnouncementDetail from './AnnouncementDetail';
 import DrawerButton from "../../components/DrawerButton";
 
 const AnnouncementStack = createStackNavigator({
+
   List: {
     screen: AnnouncementList,
     navigationOptions: ({ navigation }) => ({
@@ -35,7 +36,7 @@ const AnnouncementStack = createStackNavigator({
       },
       headerTintColor: '#fff',
     }
-  }
+  },
 });
 
 export default AnnouncementStack;

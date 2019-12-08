@@ -40,9 +40,11 @@ export default class ContactDetail extends Component {
         <View style={s.body}>
           <View style={s.itemContainer}>
             <View style={s.iconContainer}>
-              <Icon
-                style={[s.icon, {color: '#e6b2c9'}]}
-                name='git-network'/>
+              <View style={s.iconBorder}>
+                <Icon
+                  style={[s.icon, {color: '#e6b2c9'}]}
+                  name='git-network'/>
+              </View>
             </View>
             <View style={s.textContainer}>
               <Text style={s.title}>Departman</Text>
@@ -51,9 +53,11 @@ export default class ContactDetail extends Component {
           </View>
           <View style={s.itemContainer}>
             <View style={s.iconContainer}>
-              <Icon
-                style={[s.icon, {color: '#eee2aa'}]}
-                name='briefcase'/>
+              <View style={s.iconBorder}>
+                <Icon
+                  style={[s.icon, {color: '#eee2aa'}]}
+                  name='briefcase'/>
+              </View>
             </View>
             <View style={s.textContainer}>
               <Text style={s.title}>Görev</Text>
@@ -62,9 +66,11 @@ export default class ContactDetail extends Component {
           </View>
           <View style={s.itemContainer}>
             <View style={s.iconContainer}>
-              <Icon
-                style={[s.icon, {color: '#8cbeec'}]}
-                name='phone-portrait'/>
+              <View style={s.iconBorder}>
+                <Icon
+                  style={[s.icon, {color: '#8cbeec'}]}
+                  name='phone-portrait'/>
+              </View>
             </View>
             <View style={s.textContainer}>
               <Text style={s.title}>GSM</Text>
@@ -73,9 +79,11 @@ export default class ContactDetail extends Component {
           </View>
           <View style={s.itemContainer}>
             <View style={s.iconContainer}>
-              <Icon
-                style={[s.icon, {color: '#b1e3d2'}]}
-                name='mail'/>
+              <View style={s.iconBorder}>
+                <Icon
+                  style={[s.icon, {color: '#b1e3d2'}]}
+                  name='mail'/>
+              </View>
             </View>
             <View style={s.textContainer}>
               <Text style={s.title}>Email</Text>

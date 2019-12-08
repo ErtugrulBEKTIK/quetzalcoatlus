@@ -59,16 +59,22 @@ const s = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 15,
     borderBottomColor: '#eee'
   },
   iconContainer: {
-    width: res(42),
+    flex: 1,
+    marginRight: res(10),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  iconBorder: {
+    flex: 1,
     height: res(42),
+    width: res(42),
     borderRadius: res(22),
     borderWidth: res(4),
-    borderColor: 'rgba(240,240,240,0.4)',
-    marginHorizontal: res(10),
+    borderColor: "rgba(240,240,240,0.4)",
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -77,8 +83,8 @@ const s = StyleSheet.create({
   },
   textContainer: {
     height: res(40),
-    justifyContent: 'space-around',
-    width: '85%',
+    justifyContent: 'space-between',
+    flex: 5
   },
   title: {
     fontSize: res(12),

@@ -7,7 +7,7 @@ import {res} from '../../../helpers';
 export default class AnnounceSlide extends Component {
   render() {
     return (
-      <View>
+      <View style={s.container}>
         <SwiperFlatList
           showPagination
           autoplay
@@ -31,7 +31,7 @@ export default class AnnounceSlide extends Component {
           </View>
           <View style={[s.itemContainer, { backgroundColor: '#5dca56' }]}>
             <View style={s.header}>
-              <Text style={s.headerText}>PAZARTESİ</Text>
+              <Text style={s.headerText}>SALI</Text>
               <Text style={s.headerText}>
                 <Icon name="calendar" type="AntDesign" style={[s.headerText, s.calendarIcon]} />&nbsp;
                 04.12.2019
@@ -44,7 +44,7 @@ export default class AnnounceSlide extends Component {
           </View>
           <View style={[s.itemContainer, { backgroundColor: '#378aed' }]}>
             <View style={s.header}>
-              <Text style={s.headerText}>PAZARTESİ</Text>
+              <Text style={s.headerText}>ÇARŞAMBA</Text>
               <Text style={s.headerText}>
                 <Icon name="calendar" type="AntDesign" style={[s.headerText, s.calendarIcon]} />&nbsp;
                 04.12.2019
@@ -90,11 +90,11 @@ export default class AnnounceSlide extends Component {
 const { width } = Dimensions.get('window');
 const s = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: 'white'
   },
   itemContainer: {
-    height: res(200),
+    flex: 1,
     width,
     justifyContent: 'center',
   },

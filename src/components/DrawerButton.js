@@ -16,7 +16,7 @@ export default class DrawerButton extends Component {
         style={{ paddingHorizontal: 10 }}>
         <Icon
           name="ios-menu"
-          style={{fontSize: res(26), color: color ? color : '#000'}}
+          style={{fontSize: res(36), color: color ? color : '#000'}}
         />
 
       </TouchableOpacity>
