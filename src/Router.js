@@ -108,7 +108,7 @@ const SwitchNavigator = createSwitchNavigator(
     Auth: AuthStack,
   },
   {
-    initialRouteName: 'Redirector',
+    initialRouteName: 'Auth',
   }
 );
 

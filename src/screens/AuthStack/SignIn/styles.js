@@ -13,7 +13,7 @@ const s = StyleSheet.create({
     left: 0,
     height: res(350),
     width: '100%',
-    backgroundColor: '#48aec4'
+    backgroundColor: '#4663a5'
   },
   logoContainer: {
     justifyContent: 'center',
@@ -24,13 +24,13 @@ const s = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    height: res(150),
-    width: res(150),
+    height: res(120),
+    resizeMode: "contain",
   },
   loginArea: {
     marginHorizontal: 'auto',
     width: res(300),
-    marginVertical: res(50),
+    marginTop: res(100),
     backgroundColor: '#fff',
     padding: res(20),
     borderRadius: res(5),
@@ -46,7 +46,7 @@ const s = StyleSheet.create({
   },
   loginAreaTitle: {
     fontSize: res(20),
-    marginBottom: res(20),
+    marginBottom: res(30),
     textAlign: 'center'
   }
 });

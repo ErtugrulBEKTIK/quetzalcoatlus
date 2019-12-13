@@ -14,26 +14,21 @@ import {inject} from 'mobx-react';
 export default class SignInForm extends Component {
   _handleSubmit = async ({ username, password }, bag) => {
     try {
-      const response = await axios.post('Login/Login',
+      const response = await axios.post('api/login',
         {
-          Username: username,
-          UserPass: password,
-          apikey: '98B46602-DA8F-4DC8-9E71-6D8ABB9A2DFF'
+          username,
+          password,
         }
       );
       bag.setSubmitting(false);
 
-      console.log(response);
-      if (!response.data) {
-        alert('Giriş bilgileri hatalı.');
-        return false;
-      }
+      alert('Giriş Başarılı');
 
-      this.props.AuthStore.saveUser(username, response.data[0]);
+      //this.props.AuthStore.saveUser(username, response.data[0]);
     }catch (e) {
       bag.setSubmitting(false);
-      bag.setErrors(e);
       console.log(e);
+      alert('Giriş başarısız tekrar deneyin.');
     }
   };
 
@@ -41,8 +36,8 @@ export default class SignInForm extends Component {
     return (
       <Formik
         initialValues={{
-          username: '1318',
-          password: '1234'
+          username: 'admin2',
+          password: 'admin2'
         }}
         onSubmit={this._handleSubmit}
         validationSchema={validations}
@@ -71,7 +66,7 @@ export default class SignInForm extends Component {
                   autoCapitalize={'none'}
                 />
 
-                { (errors.username && touched.username) && <Icon style={{fontSize: 17}} name='close-circle' />}
+                { (errors.username && touched.username) && <Icon style={{fontSize: res(17)}} name='close-circle' />}
               </Item>
 
               <Item
@@ -90,7 +85,7 @@ export default class SignInForm extends Component {
                   secureTextEntry={true}
                 />
 
-                { (errors.password && touched.password) && <Icon style={{fontSize: 17}} name='close-circle' />}
+                { (errors.password && touched.password) && <Icon style={{fontSize: res(17)}} name='close-circle' />}
               </Item>
 
               <Button
@@ -102,7 +97,6 @@ export default class SignInForm extends Component {
                 { isSubmitting && <Spinner size={'small'} color={'white'} /> }
                 <Text style={{fontSize: res(15)}}>GİRİŞ YAP</Text>
               </Button>
-
 
           </React.Fragment>
         )}

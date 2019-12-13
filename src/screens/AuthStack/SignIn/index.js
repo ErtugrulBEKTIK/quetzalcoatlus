@@ -3,20 +3,25 @@ import { Text, Image, View, ScrollView, KeyboardAvoidingView, TouchableOpacity }
 import s from './styles';
 
 import SignInForm from './SignInForm';
+import {inject, observer} from 'mobx-react';
+import axios2 from "axios";
 
+@inject('AuthStore')
+@observer
 export default class SignIn extends Component {
+  async componentDidMount() {
+    await this.props.AuthStore.setupAuth();
+  }
+
   render() {
     return (
       <View style={s.container}>
         <View style={s.headBackground} />
-
         <KeyboardAvoidingView behavior={"position"}>
-          <View style={s.logoContainer}>
-            <Image style={s.logo} source={require('../../../assets/images/logo2.png')}/>
-          </View>
+
           <ScrollView contentContainerStyle={s.scrollView}>
             <View style={s.loginArea}>
-              <Text style={s.loginAreaTitle}>TÜGVA Portal Giriş</Text>
+              <Text style={s.loginAreaTitle}>Giriş Yap</Text>
               <SignInForm/>
             </View>
           </ScrollView>
