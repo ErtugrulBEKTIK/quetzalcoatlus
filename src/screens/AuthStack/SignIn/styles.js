@@ -5,7 +5,6 @@ const s = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
-    paddingVertical: res(80)
   },
   headBackground: {
     position: 'absolute',
@@ -30,7 +29,7 @@ const s = StyleSheet.create({
   loginArea: {
     marginHorizontal: 'auto',
     width: res(300),
-    marginTop: res(100),
+    marginTop: res(200),
     backgroundColor: '#fff',
     padding: res(20),
     borderRadius: res(5),

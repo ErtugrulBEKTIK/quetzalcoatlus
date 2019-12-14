@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View, ScrollView, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import {Text, Image, View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Platform} from 'react-native';
 import s from './styles';
 
 import SignInForm from './SignInForm';
@@ -17,7 +17,7 @@ export default class SignIn extends Component {
     return (
       <View style={s.container}>
         <View style={s.headBackground} />
-        <KeyboardAvoidingView behavior={"position"}>
+        <KeyboardAvoidingView behavior={"padding"} enabled={Platform.OS === 'ios'}>
 
           <ScrollView contentContainerStyle={s.scrollView}>
             <View style={s.loginArea}>

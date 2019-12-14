@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Text, Image, View, ScrollView, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { Text, Image, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import s from './styles';
 
 import SignUpForm from './SignUpForm';
 import {inject, observer} from 'mobx-react';
-import axios2 from "axios";
 
 @inject('AuthStore')
 @observer
@@ -17,7 +16,7 @@ export default class SignUp extends Component {
     return (
       <View style={s.container}>
         <View style={s.headBackground} />
-        <KeyboardAvoidingView behavior={"position"}>
+        <KeyboardAvoidingView behavior={"padding"} enabled={Platform.OS === 'ios'}>
 
           <ScrollView contentContainerStyle={s.scrollView}>
             <View style={s.loginArea}>
