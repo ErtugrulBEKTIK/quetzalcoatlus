@@ -134,19 +134,20 @@ export default class CompanyList extends Component {
           animationType="slide"
           transparent={false}
           visible={this.state.qrModal}>
-          <TouchableHighlight
+          <TouchableOpacity
             style={s.closeButton}
             onPress={() => {
               this.setState({qrModal: false})
             }}>
             <Icon style={s.closeIcon} name='close'/>
-          </TouchableHighlight>
+          </TouchableOpacity>
           <QRCodeScanner
             onRead={(e) => { alert(e.data) }}
             reactivate={true}
             showMarker={true}
             reactivateTimeout={5000}
             cameraStyle={s.camera}
+            markerStyle={{borderColor: 'white'}}
 
           />
 
