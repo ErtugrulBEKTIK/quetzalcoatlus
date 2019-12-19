@@ -3,6 +3,8 @@ package com.quetzalcoatlus;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.reactnative.camera.RNCameraPackage;
+import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
@@ -28,6 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNCameraPackage(),
+            new RNPermissionsPackage(),
             new LinearGradientPackage(),
             new VectorIconsPackage(),
             new AsyncStoragePackage(),

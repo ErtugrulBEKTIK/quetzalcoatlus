@@ -1,27 +1,32 @@
 import React from "react";
 import {createStackNavigator} from "react-navigation";
 
-import DocumentList from './DocumentList';
+import Home from './CompanyList';
 import DrawerButton from "../../components/DrawerButton";
+import LogoutButton from "../../components/LogoutButton";
 import {res} from "../../helpers";
 
-const ContactStack = createStackNavigator({
-  List: {
-    screen: DocumentList,
+const HomeStack = createStackNavigator({
+  Home: {
+    screen: Home,
     navigationOptions: ({ navigation }) => ({
-      title: 'Belgeler',
+      title: 'Quetzal Coatlus',
+      tabBarLabel: 'Anasayfa',
       headerStyle: {
         backgroundColor: '#48aec4',
       },
       headerTitleStyle: {
-        fontSize: res(16)
+        fontSize: res(20),
+        flex: 1,
+        textAlign: "center",
       },
       headerTintColor: '#fff',
       headerLeft: ({ tintColor }) => (
         <DrawerButton navigation={navigation} color={tintColor} />
-      )
+      ),
+      headerRight: <LogoutButton navigation={navigation} />
     })
   }
 });
 
-export default ContactStack;
+export default HomeStack;

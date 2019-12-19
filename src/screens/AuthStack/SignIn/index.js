@@ -4,7 +4,6 @@ import s from './styles';
 
 import SignInForm from './SignInForm';
 import {inject, observer} from 'mobx-react';
-import axios2 from "axios";
 
 @inject('AuthStore')
 @observer
