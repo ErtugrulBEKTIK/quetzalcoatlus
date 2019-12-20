@@ -87,7 +87,7 @@ export default class CompanyList extends Component {
 
 
 
-  renderContactsItem = ({item, index}) => {
+  renderItem = ({item, index}) => {
     const { Paylaşım_Adı, Hedef_Departmanlar, Pdflink } = item;
     return (
       <TouchableOpacity
@@ -155,11 +155,11 @@ export default class CompanyList extends Component {
         <FlatList
           ListHeaderComponent={this.renderHeader}
           ListFooterComponent={this.renderFooter}
-          renderItem={this.renderContactsItem}
+          renderItem={this.renderItem}
           keyExtractor={item => item.id.toString()}
           data={this.state.branches}
         />
-        <View style={s.qrContainer}>
+        <View style={s.footer}>
           <TouchableOpacity
             onPress={() => { this.setState({qrModal: true}) }}
             style={s.plusIconContainer}>
@@ -213,7 +213,7 @@ const s = StyleSheet.create({
     backgroundColor: 'white',
     padding: res(3),
   },
-  qrContainer: {
+  footer: {
     height: res(50),
     justifyContent: 'center',
     alignItems: 'flex-end',
