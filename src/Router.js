@@ -3,46 +3,58 @@ import {Icon} from "native-base";
 import { res } from './helpers';
 
 import {
-  createAppContainer,
+  createAppContainer, createBottomTabNavigator,
   createDrawerNavigator,
   createSwitchNavigator
 } from 'react-navigation';
 
-import DrawerButton from './components/DrawerButton';
-import DrawerMenu from './components/DrawerMenu';
 
 import Redirector from './screens/AuthStack/Redirector';
 
 // Stacks & Screens
 import AuthStack from './screens/AuthStack';
 import CompanyStack from './screens/CompanyStack';
+import QRScreen from './screens/QRScreen';
 
 
-const App = createDrawerNavigator({
+const App = createBottomTabNavigator({
   Home: {
     screen: CompanyStack,
-    navigationOptions: ({ navigation }) => ({
-      title: 'İşletme Listesi',
-      headerLeft: <DrawerButton navigation={navigation} />,
-      drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='home' />
-      ),
-    })
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="search" style={{ color: tintColor, marginTop: res(5) }} />
+    }
+  },
+  QR: {
+    screen: QRScreen,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon type='FontAwesome' name="qrcode" style={{ color: tintColor, marginTop: res(5) }} />,
+      tabBarVisible: false
+    }
+  },
+  Card: {
+    screen: CompanyStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="basket" style={{ color: tintColor, marginTop: res(5) }} />
+    }
+  },
+  Favorites: {
+    screen: CompanyStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="heart" style={{ color: tintColor, marginTop: res(5) }} />
+    }
+  },
+  Profile: {
+    screen: CompanyStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon type='MaterialIcons' name="person" style={{ color: tintColor, marginTop: res(5) }} />
+    }
   }
 }, {
   initialRouteName: 'Home',
-  contentComponent: DrawerMenu,
-  drawerWidth: res(250),
-  overlayColor: 'rgba(0,0,0,0.67)',
-  contentOptions: {
-    activeTintColor: '#fff',
-    inactiveTintColor: '#3897a7',
-    activeBackgroundColor: '#48aec4',
-    inactiveBackgroundColor: '#fff',
-    iconContainerStyle: { marginRight: 0, width: res(25)},
-    labelStyle: {
-      fontSize: res(14)
-    }
+  tabBarOptions: {
+    activeTintColor: '#00ACAC',
+    inactiveTintColor: '#005454',
+    showLabel: false
   }
 });
 

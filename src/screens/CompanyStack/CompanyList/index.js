@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, SafeAreaView, TouchableOpacity, FlatList,
-  View, ActivityIndicator, TextInput, Image, Modal, TouchableHighlight, Dimensions} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, FlatList,
+  View, TextInput, Image, Dimensions} from 'react-native';
 import NavigationService from "../../../NavigationService";
-import { Icon } from "native-base";
 import ProgressBar from 'react-native-progress/Bar';
-import QRCodeScanner from 'react-native-qrcode-scanner';
 import axios from "../../../Api";
 import {res, T} from "../../../helpers";
-import { RNCamera } from 'react-native-camera';
 
-import {inject, observer} from 'mobx-react';
+import { inject } from 'mobx-react';
 
 @inject('AuthStore')
 export default class CompanyList extends Component {
@@ -18,7 +15,6 @@ export default class CompanyList extends Component {
     page: 1,
     companies: [],
     branches: [],
-    qrModal: false,
     loading: true,
   };
 
@@ -84,20 +80,16 @@ export default class CompanyList extends Component {
     )
   };
 
-
-
-
   renderItem = ({item, index}) => {
-    const { Paylaşım_Adı, Hedef_Departmanlar, Pdflink } = item;
     return (
       <TouchableOpacity
-        onPress={() => { NavigationService.navigate('Detail', {item}) }}
+        onPress={() => { NavigationService.navigate('Company', {item}) }}
         style={s.itemContainer}
       >
         <View style={s.imageContainer}>
           <Image
             style={s.image}
-            source={{uri: 'https://media-cdn.tripadvisor.com/media/photo-s/03/0e/2a/06/capari-restoran.jpg'}}/>
+            source={{uri: 'http://lorempixel.com/350/350/food/'}}/>
           <ProgressBar
             progress={0.8}
             borderRadius={0}
@@ -105,68 +97,25 @@ export default class CompanyList extends Component {
             color="#6be672"
             unfilledColor="#ffffff"
             borderColor="#d3dbff"
-            width={res(60)}/>
+            width={res(90)}/>
         </View>
         <View style={s.textContainer}>
           <Text style={s.name}>{item.name}</Text>
-          <Text style={s.name}>{item.province} / {item.country}</Text>
-          <Text style={s.name}>{item.phoneNumber}</Text>
+          <Text style={s.detail}>{item.province} / {item.country}</Text>
+          <Text style={s.detail}>{item.phoneNumber}</Text>
         </View>
       </TouchableOpacity>
     )
   };
 
-  renderFooter = () => {
-    if (!this.state.loading) return null;
-    return(
-      <View style={{
-        paddingVertical: 20
-      }}>
-        <ActivityIndicator size="large" />
-      </View>
-    )
-  };
-
   render() {
     return (
-      <SafeAreaView style={s.container}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.qrModal}>
-          <TouchableOpacity
-            style={s.closeButton}
-            onPress={() => {
-              this.setState({qrModal: false})
-            }}>
-            <Icon style={s.closeIcon} name='close'/>
-          </TouchableOpacity>
-          <QRCodeScanner
-            onRead={(e) => { alert(e.data) }}
-            reactivate={true}
-            showMarker={true}
-            reactivateTimeout={5000}
-            cameraStyle={s.camera}
-            markerStyle={{borderColor: 'white'}}
-
-          />
-
-        </Modal>
-        <FlatList
-          ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
-          renderItem={this.renderItem}
-          keyExtractor={item => item.id.toString()}
-          data={this.state.branches}
-        />
-        <View style={s.footer}>
-          <TouchableOpacity
-            onPress={() => { this.setState({qrModal: true}) }}
-            style={s.plusIconContainer}>
-            <Icon style={s.plusIcon} type="FontAwesome" name="plus"/>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+      <FlatList
+        ListHeaderComponent={this.renderHeader}
+        renderItem={this.renderItem}
+        keyExtractor={item => item.id.toString()}
+        data={this.state.branches}
+      />
     );
   }
 }
@@ -185,66 +134,33 @@ const s = StyleSheet.create({
     borderRadius: res(20),
     height: res(40),
     borderWidth: res(1),
-    borderColor: '#556B89'
+    borderColor: '#ddd',
   },
   itemContainer: {
     flex: 1,
     flexDirection: 'row',
-    paddingVertical: res(10),
     margin: res(10),
-    backgroundColor: '#d3dbff'
+    borderWidth: res(1),
+    borderColor: '#ddd',
+    borderRadius: res(5)
   },
   imageContainer: {
     justifyContent: 'space-around',
-    marginHorizontal: res(10)
   },
   image: {
-    width: res(60),
-    height: res(60),
-    marginBottom: res(5),
+    width: res(90),
+    height: res(90),
   },
   textContainer: {
     flex: 1,
     justifyContent: 'space-around',
-    paddingRight: res(10)
+    padding: res(10),
   },
   name: {
+    fontSize: res(18),
+    fontWeight: 'bold'
+  },
+  detail: {
     fontSize: res(14),
-    backgroundColor: 'white',
-    padding: res(3),
-  },
-  footer: {
-    height: res(50),
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    borderTopWidth: res(2),
-    borderColor: '#556B89',
-    paddingHorizontal: res(10)
-  },
-  plusIconContainer: {
-    width: res(40),
-    height: res(40),
-    borderWidth: res(2),
-    borderRadius: res(20),
-    borderColor: '#556B89',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  plusIcon: {
-    color: '#556B89',
-    fontSize: res(24)
-  },
-  camera: {
-    height: Dimensions.get('window').height
-  },
-  closeButton: {
-    position: 'absolute',
-    top: res(40),
-    left: res(20),
-    zIndex: 20
-  },
-  closeIcon: {
-    color: 'white',
-    fontSize: res(45)
   }
 });

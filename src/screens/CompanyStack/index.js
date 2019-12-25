@@ -1,21 +1,20 @@
 import React from "react";
 import {createStackNavigator} from "react-navigation";
+import {View, Text} from "react-native";
 
 import CompanyList from './CompanyList';
-import CompanyDetail from './CompanyDetail';
+import Company from './Company';
+import CompanyHeader from './Company/Header';
 
-import DrawerButton from "../../components/DrawerButton";
-import LogoutButton from "../../components/LogoutButton";
 import {res} from "../../helpers";
 
-const HomeStack = createStackNavigator({
-  Home: {
+const CompanyStack = createStackNavigator({
+  CompanyList: {
     screen: CompanyList,
     navigationOptions: ({ navigation }) => ({
       title: 'Quetzal Coatlus',
-      tabBarLabel: 'İşletme Listesi',
       headerStyle: {
-        backgroundColor: '#48aec4',
+        backgroundColor: '#00ACAC',
       },
       headerTitleStyle: {
         fontSize: res(20),
@@ -23,26 +22,15 @@ const HomeStack = createStackNavigator({
         textAlign: "center",
       },
       headerBackTitle: ' ',
-      headerTintColor: '#fff',
-      headerLeft: ({ tintColor }) => (
-        <DrawerButton navigation={navigation} color={tintColor} />
-      ),
-      headerRight: <LogoutButton navigation={navigation} />
+      headerTintColor: '#fff'
     })
   },
-  Detail: {
-    screen: CompanyDetail,
-    navigationOptions: {
-      title: 'Detay',
-      headerStyle: {
-        backgroundColor: '#48aec4',
-      },
-      headerTitleStyle: {
-        fontSize: res(16)
-      },
-      headerTintColor: '#fff',
-    }
+  Company: {
+    screen: Company,
+    navigationOptions: (props) => ({
+      header: CompanyHeader(props)
+    })
   },
 });
 
-export default HomeStack;
+export default CompanyStack;
