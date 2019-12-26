@@ -38,12 +38,36 @@ export default class CompanyList extends Component {
         branches = [...branches, ...company.branches]
       });
 
+      // Setting Total and Available Capacity
+      let newBranches = [];
+      branches.map((branch) => {
+        let totalCapacity = 0;
+        let availableCapacity = 0;
+
+        branch.halls.map((hall) => {
+          hall.table.map((table) => {
+            if(table.active){
+              availableCapacity += table.capacity;
+            }
+
+            totalCapacity += table.capacity;
+          });
+        });
+
+        newBranches.push({
+          ...branch,
+          totalCapacity,
+          availableCapacity
+        })
+      });
+
       this.setState({
         companies: data,
-        branches,
-        allBranches: branches,
+        branches: newBranches,
+        allBranches: newBranches,
         loading: false,
       });
+
     }catch (e) {
       console.log(e);
     }
@@ -81,6 +105,8 @@ export default class CompanyList extends Component {
   };
 
   renderItem = ({item, index}) => {
+    const capacity = item.totalCapacity === 0 ? 0 : ((item.totalCapacity-item.availableCapacity)/item.totalCapacity);
+
     return (
       <TouchableOpacity
         onPress={() => { NavigationService.navigate('Company', {item}) }}
@@ -91,10 +117,10 @@ export default class CompanyList extends Component {
             style={s.image}
             source={{uri: 'http://lorempixel.com/350/350/food/'}}/>
           <ProgressBar
-            progress={0.8}
+            progress={capacity}
             borderRadius={0}
             height={10}
-            color="#6be672"
+            color={T.getColorGreenToRed(capacity)}
             unfilledColor="#ffffff"
             borderColor="#d3dbff"
             width={res(90)}/>

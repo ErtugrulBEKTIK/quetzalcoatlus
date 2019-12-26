@@ -92,3 +92,9 @@ export function b2a(a) {
   return m = n.join(""), o = a.length % 3, (o ? m.slice(0, o - 3) :m) + "===".slice(o || 3);
 }
 
+export function getColorGreenToRed(value){
+  //value from 0 to 1
+  const hue=((1-value)*120).toString(10);
+  return ["hsl(",hue,",100%,50%)"].join("");
+}
+

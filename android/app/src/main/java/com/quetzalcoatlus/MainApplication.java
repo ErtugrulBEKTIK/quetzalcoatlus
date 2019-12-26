@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import org.reactnative.camera.RNCameraPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -36,7 +37,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new AsyncStoragePackage(),
             new RNGestureHandlerPackage(),
-            new ReanimatedPackage()
+            new ReanimatedPackage(),
+            new MapsPackage()
       );
     }
 
