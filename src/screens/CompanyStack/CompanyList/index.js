@@ -184,9 +184,11 @@ const s = StyleSheet.create({
   },
   name: {
     fontSize: res(18),
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#000'
   },
   detail: {
     fontSize: res(14),
+    color: '#000'
   }
 });

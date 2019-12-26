@@ -7,7 +7,7 @@ import { Icon } from "native-base";
 import axios from "../../../Api";
 import {res, T} from "../../../helpers";
 
-import CartItem from './CartItem';
+import FavoriteItem from './FavoriteItem';
 import { inject, observer } from 'mobx-react';
 
 @inject('CartStore')
@@ -21,30 +21,14 @@ export default class ItemList extends Component {
   render() {
     const { cartList } = this.props.CartStore;
 
-    let total = 0;
-
-    cartList.map((item) => {
-      total += item.count * item.fee
-    });
-
-
     return (
       <View style={s.container}>
         <FlatList
           style={s.flatList}
-          data={cartList}
+          data={[]}
           keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => <CartItem item={item} />}
+          renderItem={({ item }) => <FavoriteItem item={item} />}
         />
-        <View style={s.footer}>
-          <View style={s.total}>
-            <Text style={s.totalText}>Toplam</Text>
-            <Text style={s.totalAmount}>₺{total}</Text>
-          </View>
-          <TouchableOpacity style={s.orderButton}>
-            <Text style={s.orderText}>Siparişi Tamamla</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }

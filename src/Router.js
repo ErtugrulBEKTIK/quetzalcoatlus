@@ -15,6 +15,8 @@ import Redirector from './screens/AuthStack/Redirector';
 import AuthStack from './screens/AuthStack';
 import CompanyStack from './screens/CompanyStack';
 import CartStack from './screens/CartStack';
+import FavoriteStack from './screens/FavoriteStack';
+import ProfileStack from './screens/ProfileStack';
 import QRScreen from './screens/QRScreen';
 
 
@@ -39,13 +41,13 @@ const App = createBottomTabNavigator({
     }
   },
   Favorites: {
-    screen: CompanyStack,
+    screen: FavoriteStack,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Icon name="heart" style={{ color: tintColor, marginTop: res(5) }} />
     }
   },
   Profile: {
-    screen: CompanyStack,
+    screen: ProfileStack,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Icon type='MaterialIcons' name="person" style={{ color: tintColor, marginTop: res(5) }} />
     }

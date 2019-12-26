@@ -112,7 +112,8 @@ const s = StyleSheet.create({
   header: {
     fontSize: 32,
     marginHorizontal: res(10),
-    marginTop: res(20)
+    marginTop: res(20),
+    color: '#000'
   }
 
 });
