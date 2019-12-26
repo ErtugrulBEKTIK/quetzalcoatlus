@@ -3,7 +3,8 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import NavigationService from "../../../../NavigationService";
 import {res} from "../../../../helpers";
 
-const MealItem = ({item: {title, fee}}) => {
+const MealItem = ({ item, CartStore }) => {
+  const {title, fee} = item;
   return (
     <View
       onPress={() => { NavigationService.navigate('Company', {item}) }}
@@ -26,7 +27,10 @@ const MealItem = ({item: {title, fee}}) => {
             <Text style={s.fee}>₺{fee}</Text>
           </View>
 
-          <TouchableOpacity style={s.addButton}>
+          <TouchableOpacity
+            onPress={() => { CartStore.addItem(item) }}
+            style={s.addButton}
+          >
             <Text style={s.addButtonText}>+Ekle</Text>
           </TouchableOpacity>
         </View>

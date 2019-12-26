@@ -9,13 +9,16 @@ import {res, T} from "../../../../helpers";
 
 import MealItem from './MealItem';
 
+import { inject, observer } from 'mobx-react';
+
+@inject('CartStore')
+@observer
 export default class CompanyDetail extends Component {
 
   constructor(props) {
     super(props);
     this.company = props.navigation.getParam('item');
   }
-
 
   state = {
     menu: [],
@@ -85,14 +88,6 @@ export default class CompanyDetail extends Component {
     }
   };
 
-  renderItem = () => {
-
-  };
-
-  renderSectionHeader = () => {
-
-  };
-
   render() {
     return (
       <View style={s.container}>
@@ -100,7 +95,7 @@ export default class CompanyDetail extends Component {
           sections={this.state.menu}
           keyExtractor={(item, index) => item + index}
           stickySectionHeadersEnabled={false}
-          renderItem={({ item }) => <MealItem item={item} />}
+          renderItem={({ item }) => <MealItem {...this.props} item={item} />}
           renderSectionHeader={({ section: { title } }) => (
             <Text style={s.header}>{title}</Text>
           )}

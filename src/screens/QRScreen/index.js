@@ -4,23 +4,20 @@ import {StyleSheet, Text, SafeAreaView, TouchableOpacity, FlatList,
 import NavigationService from "../../NavigationService";
 import { Icon } from "native-base";
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import axios from "../../Api";
+import Svg from 'react-native-svg-uri';
 import {res, T} from "../../helpers";
 
-import {inject, observer} from 'mobx-react';
-
-@inject('AuthStore')
 export default class CompanyList extends Component {
   state = {
   };
 
   renderMaker = () => (
-    <View>
-      <Icon style={s.qrScannerIcon} name='qr-scanner'/>
+    <View style={s.marker}>
+      <Svg
+        width={res(200)} height={res(200)}
+        source={require('../../assets/images/qr.svg')}/>
     </View>
   );
-
-
 
   render() {
     return (
@@ -28,7 +25,7 @@ export default class CompanyList extends Component {
         <TouchableOpacity
           style={s.closeButton}
           onPress={() => {
-            NavigationService.navigate('Home')
+            NavigationService.navigate('Companies')
           }}>
           <Icon style={s.closeIcon} name='close'/>
         </TouchableOpacity>
@@ -53,9 +50,9 @@ const s = StyleSheet.create({
   camera: {
     height: Dimensions.get('window').height
   },
-  qrScannerIcon: {
-    fontSize: res(230),
-    color: 'white'
+  marker: {
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   closeButton: {
     position: 'absolute',

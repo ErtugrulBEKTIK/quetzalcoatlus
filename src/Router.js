@@ -14,11 +14,12 @@ import Redirector from './screens/AuthStack/Redirector';
 // Stacks & Screens
 import AuthStack from './screens/AuthStack';
 import CompanyStack from './screens/CompanyStack';
+import CartStack from './screens/CartStack';
 import QRScreen from './screens/QRScreen';
 
 
 const App = createBottomTabNavigator({
-  Home: {
+  Companies: {
     screen: CompanyStack,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Icon name="search" style={{ color: tintColor, marginTop: res(5) }} />
@@ -31,8 +32,8 @@ const App = createBottomTabNavigator({
       tabBarVisible: false
     }
   },
-  Card: {
-    screen: CompanyStack,
+  Cart: {
+    screen: CartStack,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Icon name="basket" style={{ color: tintColor, marginTop: res(5) }} />
     }
@@ -50,7 +51,7 @@ const App = createBottomTabNavigator({
     }
   }
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'Companies',
   tabBarOptions: {
     activeTintColor: '#00ACAC',
     inactiveTintColor: '#005454',
