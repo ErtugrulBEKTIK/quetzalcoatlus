@@ -9,7 +9,7 @@ export default class LogoutButton extends Component {
   render() {
     return (
       <TouchableOpacity
-        onPress={() => this.props.AuthStore.removeUser()}
+        onPress={() => this.props.AuthStore.logout()}
         style={styles.buttonContainer}>
         <Icon style={styles.icon}
               type="FontAwesome"

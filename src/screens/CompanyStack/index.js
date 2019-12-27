@@ -5,6 +5,7 @@ import {View, Text} from "react-native";
 import CompanyList from './CompanyList';
 import Company from './Company';
 import CompanyHeader from './Company/Header';
+import LogoutButton from "../../components/LogoutButton";
 
 import {res} from "../../helpers";
 
@@ -22,7 +23,8 @@ const CompanyStack = createStackNavigator({
         textAlign: "center",
       },
       headerBackTitle: ' ',
-      headerTintColor: '#fff'
+      headerTintColor: '#fff',
+      headerRight: <LogoutButton navigation={navigation} />
     })
   },
   Company: {

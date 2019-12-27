@@ -22,9 +22,8 @@ export default class SignInForm extends Component {
       );
       bag.setSubmitting(false);
 
-      alert('Giriş Başarılı');
+      this.props.AuthStore.login();
 
-      //this.props.AuthStore.saveUser(username, response.data[0]);
     }catch (e) {
       bag.setSubmitting(false);
       console.log(e);

@@ -12,9 +12,11 @@ import NavigationService from '../NavigationService';
 class AuthStore{
   @observable token = '';
   @observable tokenExp = '';
+  @observable user = false;
 
   @action async setupAuth(){
     await this.setToken();
+    await this.setUser();
   }
 
   @action async getToken(){
@@ -90,6 +92,32 @@ class AuthStore{
       const user = await AsyncStorage.getItem('user');
       this.user = JSON.parse(user);
 
+      if(this.user){
+        NavigationService.navigate('App')
+      }else{
+        NavigationService.navigate('Auth')
+      }
+
+    }catch (e) {
+      console.log(e);
+    }
+  }
+
+  @action async login(){
+    try{
+      await AsyncStorage.setItem('user', JSON.stringify(true));
+      this.user = true;
+      NavigationService.navigate('App')
+    }catch (e) {
+      console.log(e);
+    }
+  }
+
+  @action async logout(){
+    try{
+      await AsyncStorage.setItem('user', JSON.stringify(false));
+      this.user = false;
+      NavigationService.navigate('Auth')
     }catch (e) {
       console.log(e);
     }
