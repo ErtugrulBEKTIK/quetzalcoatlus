@@ -26,11 +26,8 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string/>
-
 	<key>NSCameraUsageDescription</key>
-    <string>QR Kodu okumak için kamera izini</string>
-	
-	
+	<string>QR Kodu okumak için kamera izini</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

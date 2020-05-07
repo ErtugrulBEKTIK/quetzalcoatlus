@@ -1,11 +1,12 @@
 import {observable, action} from 'mobx';
-import AsyncStorage from '@react-native-community/async-storage';
 import _ from 'lodash';
-import {T} from '../helpers';
+import axios from "~/Api";
+import { T } from "~/helpers";
 
 
 class CartStore{
   @observable cartList = [];
+  @observable tableId = null;
 
   @action addItem(item){
     // const user = AsyncStorage.getItem('user');
@@ -47,6 +48,40 @@ class CartStore{
         }
       }
     })
+  }
+
+  @action setTableId(id){
+    this.tableId = id;
+  }
+
+
+  @action async order(userId){
+    try {
+
+
+      let postData = {
+        userId,
+        tableId: this.tableId,
+        mealId: [],
+      };
+
+      this.cartList.map((item) => {
+        for(let i = 1; i <= item.count; i++){
+          postData.mealId.push(item.id)
+        }
+      });
+
+      await axios.post('api/takeOrder', postData);
+
+      this.cartList = [];
+
+      alert('Siparişiniz başarılı bir şekilde verilmiştir.');
+
+
+    }catch (e) {
+      console.log(e);
+      alert('Sipariş verilirken hata meydana geldi.');
+    }
   }
 
 }

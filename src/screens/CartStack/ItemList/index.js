@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, SafeAreaView, TouchableOpacity, FlatList,
-  View, ActivityIndicator, TextInput, Image, Modal, TouchableHighlight, Dimensions} from 'react-native';
-import NavigationService from "../../../NavigationService";
-import { Icon } from "native-base";
-
-import axios from "../../../Api";
-import {res, T} from "../../../helpers";
-
+import {StyleSheet, Text,TouchableOpacity, FlatList, View, Dimensions} from 'react-native';
+import {res} from "../../../helpers";
 import CartItem from './CartItem';
 import { inject, observer } from 'mobx-react';
 
-@inject('CartStore')
+@inject('AuthStore', 'CartStore')
 @observer
 export default class ItemList extends Component {
 
@@ -41,7 +35,7 @@ export default class ItemList extends Component {
             <Text style={s.totalText}>Toplam</Text>
             <Text style={s.totalAmount}>₺{total}</Text>
           </View>
-          <TouchableOpacity style={s.orderButton}>
+          <TouchableOpacity onPress={() => { this.props.CartStore.order(this.props.AuthStore.user.id) }} style={s.orderButton}>
             <Text style={s.orderText}>Siparişi Tamamla</Text>
           </TouchableOpacity>
         </View>

@@ -11,13 +11,13 @@ import { inject, observer } from 'mobx-react';
 export default class extends Component {
 
   render() {
-    const {id, title, fee, count} = this.props.item;
+    const {id, title, fee, count, image} = this.props.item;
     return (
       <View style={s.itemContainer}>
         <View style={s.imageContainer}>
           <Image
             style={s.image}
-            source={{uri: 'http://lorempixel.com/350/350/food/'}}
+            source={{uri: image}}
           />
         </View>
         <View style={s.textContainer}>

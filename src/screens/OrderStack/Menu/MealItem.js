@@ -92,7 +92,6 @@ export default class MealItem extends Component {
                 keyExtractor={item => item.id.toString()}
                 data={this.state.ingredients}
               />
-
               <View style={s.modalFooter}>
                 <View style={s.infoContainer}>
                   <Text>Kalori: {item.calorie}kcal</Text>
@@ -102,8 +101,6 @@ export default class MealItem extends Component {
                   <Text style={{color: 'white'}}>Kapat</Text>
                 </TouchableBar>
               </View>
-
-
             </Box>
           </View>
         </Modal>
@@ -127,7 +124,19 @@ export default class MealItem extends Component {
           </View>
 
         </View>
-
+        <TouchableOpacity
+          onPress={() => {
+            CartStore.addItem(item);
+            Toast.show({
+              text: 'Sepete eklendi!',
+              buttonText: 'Kapat',
+              type: 'success'
+            })
+          }}
+          style={s.addButton}
+        >
+          <Text style={s.addButtonText}>+Ekle</Text>
+        </TouchableOpacity>
       </View>
     );
   }

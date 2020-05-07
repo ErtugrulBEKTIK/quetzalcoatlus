@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, SectionList,} from 'react-native';
+import {StyleSheet, Text,  SectionList, View } from 'react-native';
 import {Root} from 'native-base';
 import {Container} from '~/components/my-base';
 import axios from "~/Api";
@@ -9,12 +9,8 @@ import { inject, observer } from 'mobx-react';
 
 @inject('CartStore')
 @observer
-export default class CompanyDetail extends Component {
+export default class Menu extends Component {
 
-  constructor(props) {
-    super(props);
-    this.company = props.navigation.getParam('item');
-  }
 
   state = {
     menu: [],
@@ -31,8 +27,9 @@ export default class CompanyDetail extends Component {
     });
 
     try {
+
       const { data } = await axios.post('api/menu', {
-        branchId: this.company.id
+        branchId: this.props.navigation.getParam('branchId')
       });
 
       const lng = 'tr_TR';
@@ -108,9 +105,10 @@ export default class CompanyDetail extends Component {
   };
 
   render() {
-    const { menu, loading} = this.state;
+    const { loading, menu } = this.state;
+
     return (
-      <Container style={s.container} loading={loading} scroll>
+      <Container style={s.container} loading={loading}>
         <Root>
           <SectionList
             sections={menu}

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import {Button, Content, Input, Item, Spinner, Text, Icon, Label} from "native-base";
 import {Formik} from "formik";
-import {res} from '../../../helpers';
+import {res} from '~/helpers';
 
-import axios from '../../../Api';
+import axios from '~/Api';
 import validations from './validations';
 
 
@@ -18,6 +18,7 @@ export default class SignUpForm extends Component {
         data
       );
       bag.setSubmitting(false);
+      bag.resetForm({});
 
       alert('Kayıt Başarılı');
 

@@ -103,10 +103,10 @@ class AuthStore{
     }
   }
 
-  @action async login(){
+  @action async login(user){
     try{
-      await AsyncStorage.setItem('user', JSON.stringify(true));
-      this.user = true;
+      await AsyncStorage.setItem('user', JSON.stringify(user));
+      this.user = user;
       NavigationService.navigate('App')
     }catch (e) {
       console.log(e);

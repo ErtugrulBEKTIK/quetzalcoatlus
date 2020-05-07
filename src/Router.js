@@ -1,5 +1,6 @@
 import React from 'react';
 import {Icon} from "native-base";
+import BasketIcon from "~/components/BasketIcon";
 import { res } from './helpers';
 
 import {
@@ -17,7 +18,7 @@ import CompanyStack from './screens/CompanyStack';
 import CartStack from './screens/CartStack';
 import FavoriteStack from './screens/FavoriteStack';
 import ProfileStack from './screens/ProfileStack';
-import QRScreen from './screens/QRScreen';
+import OrderStack from './screens/OrderStack';
 
 
 const App = createBottomTabNavigator({
@@ -27,17 +28,16 @@ const App = createBottomTabNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name="search" style={{ color: tintColor, marginTop: res(5) }} />
     }
   },
-  QR: {
-    screen: QRScreen,
+  Order: {
+    screen: OrderStack,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Icon type='FontAwesome' name="qrcode" style={{ color: tintColor, marginTop: res(5) }} />,
-      tabBarVisible: false
     }
   },
   Cart: {
     screen: CartStack,
     navigationOptions: {
-      tabBarIcon: ({ tintColor }) => <Icon name="basket" style={{ color: tintColor, marginTop: res(5) }} />
+      tabBarIcon: ({ tintColor }) => <BasketIcon tintColor={tintColor}/>
     }
   },
   Favorites: {

@@ -7,7 +7,7 @@ const CompanyHeader = ({ navigation }) => {
   const company = navigation.getParam('item');
   return(
     <View style={s.container}>
-      <ImageBackground source={{uri: 'http://lorempixel.com/350/350/food/'}} style={s.imageBackground}>
+      <ImageBackground source={{uri: company.image}} style={s.imageBackground}>
         <TouchableOpacity
           style={s.backButton}
           onPress={() => navigation.goBack()}>

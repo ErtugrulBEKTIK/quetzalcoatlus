@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, TouchableOpacity, FlatList,
-  View, TextInput, Image, Dimensions} from 'react-native';
-import NavigationService from "../../../NavigationService";
+  View, TextInput, Image } from 'react-native';
+import {Container} from '~/components/my-base';
+import NavigationService from "~/NavigationService";
 import ProgressBar from 'react-native-progress/Bar';
-import axios from "../../../Api";
-import {res, T} from "../../../helpers";
+import axios from "~/Api";
+import {res, T} from "~/helpers";
 
 import { inject } from 'mobx-react';
 
@@ -35,12 +36,12 @@ export default class CompanyList extends Component {
 
       let branches = [];
       data.map((company) => {
-        branches = [...branches, ...company.branches]
+        branches = [...branches, ...company.branches];
       });
 
       // Setting Total and Available Capacity
       let newBranches = [];
-      branches.map((branch) => {
+      const mapPromisses = branches.map( async (branch) => {
         let totalCapacity = 0;
         let availableCapacity = 0;
 
@@ -57,16 +58,20 @@ export default class CompanyList extends Component {
         newBranches.push({
           ...branch,
           totalCapacity,
-          availableCapacity
+          availableCapacity,
+          image: await this.getBranchPhoto(branch.id)
         })
       });
 
-      this.setState({
-        companies: data,
-        branches: newBranches,
-        allBranches: newBranches,
-        loading: false,
+      Promise.all(mapPromisses).then(() => {
+        this.setState({
+          companies: data,
+          branches: newBranches,
+          allBranches: newBranches,
+          loading: false,
+        });
       });
+
 
     }catch (e) {
       console.log(e);
@@ -74,9 +79,26 @@ export default class CompanyList extends Component {
 
   };
 
+
+  getBranchPhoto = async (id) => {
+
+    const {data} = await axios.post('api/branchPhotograph', {
+        branchId: id,
+      }, {
+        responseType: 'arraybuffer'
+    });
+
+    return 'data:image/png;base64,'+T.b2a(
+      new Uint8Array(data)
+        .reduce((data, byte) => data + String.fromCharCode(byte), '')
+    );
+
+
+  };
+
   searchFilter = text => {
     const newData = this.state.allBranches.filter(item => {
-      const listItem = `${T.toLowerCase(item.name)} ${T.toLowerCase(item.province)} ${T.toLowerCase(item.country)}`;
+      const listItem = `${T.toLowerCase(item.name)} ${T.toLowerCase(item.address.country)} ${T.toLowerCase(item.address.quarter.name)}`;
 
       return listItem.indexOf(T.toLowerCase(text)) > -1;
     });
@@ -115,7 +137,7 @@ export default class CompanyList extends Component {
         <View style={s.imageContainer}>
           <Image
             style={s.image}
-            source={{uri: 'http://lorempixel.com/350/350/food/'}}/>
+            source={{uri: item.image}}/>
           <ProgressBar
             progress={capacity}
             borderRadius={0}
@@ -127,7 +149,7 @@ export default class CompanyList extends Component {
         </View>
         <View style={s.textContainer}>
           <Text style={s.name}>{item.name}</Text>
-          <Text style={s.detail}>{item.province} / {item.country}</Text>
+          <Text style={s.detail}>{item.address.country} / {item.address.quarter.name}</Text>
           <Text style={s.detail}>{item.phoneNumber}</Text>
         </View>
       </TouchableOpacity>
@@ -135,13 +157,18 @@ export default class CompanyList extends Component {
   };
 
   render() {
+    const { branches, loading} = this.state;
+
     return (
-      <FlatList
-        ListHeaderComponent={this.renderHeader}
-        renderItem={this.renderItem}
-        keyExtractor={item => item.id.toString()}
-        data={this.state.branches}
-      />
+      <Container scroll loading={loading}>
+        <FlatList
+          ListHeaderComponent={this.renderHeader}
+          renderItem={this.renderItem}
+          keyExtractor={item => item.id.toString()}
+          data={branches}
+        />
+      </Container>
+
     );
   }
 }

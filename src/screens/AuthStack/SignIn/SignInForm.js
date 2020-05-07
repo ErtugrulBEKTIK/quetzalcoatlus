@@ -14,15 +14,16 @@ import {inject} from 'mobx-react';
 export default class SignInForm extends Component {
   _handleSubmit = async ({ username, password }, bag) => {
     try {
-      const response = await axios.post('api/login',
+      const { data } = await axios.post('api/login',
         {
           username,
           password,
         }
       );
+
       bag.setSubmitting(false);
 
-      this.props.AuthStore.login();
+      this.props.AuthStore.login(data);
 
     }catch (e) {
       bag.setSubmitting(false);
@@ -35,8 +36,8 @@ export default class SignInForm extends Component {
     return (
       <Formik
         initialValues={{
-          username: 'admin2',
-          password: 'admin2'
+          username: 'deneme3',
+          password: '123456'
         }}
         onSubmit={this._handleSubmit}
         validationSchema={validations}

@@ -25,7 +25,7 @@ export default class CompanyDetail extends Component {
 
 
   render() {
-    const {name, phoneNumber, mail, address, province, country} = this.item;
+    const {name, phoneNumber, mail, address } = this.item;
     return (
       <ScrollView style={s.container}>
         <View style={s.card}>
@@ -39,10 +39,10 @@ export default class CompanyDetail extends Component {
           </View>
           <View style={s.slot}><
             Icon style={s.slotIcon} name='pin'/>
-            <Text style={s.slotText}>{address} </Text>
+            <Text style={s.slotText}>{address.address} </Text>
           </View>
           <View style={s.slot}>
-            <Text style={s.slotText}>{province}/{country} </Text>
+            <Text style={s.slotText}>{address.quarter.name}/{address.country} </Text>
           </View>
         </View>
         <View style={[s.card, s.mapCard]}>
