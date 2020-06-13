@@ -19,7 +19,11 @@ export default class Container extends Component {
             : (
 
             this.props.scroll ?
-              <ScrollView style={containerStyle} ref={ scrolViewRef ? (ref) => { scrolViewRef(ref) } : null } scrollEnabled={!!this.props.scroll}>
+              <ScrollView
+                style={containerStyle}
+                ref={ scrolViewRef ? (ref) => { scrolViewRef(ref) } : null }
+                refreshControl={this.props.refreshControl}
+                scrollEnabled={!!this.props.scroll}>
                 { this.props.children }
               </ScrollView>
 

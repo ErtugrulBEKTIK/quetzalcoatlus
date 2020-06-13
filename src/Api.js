@@ -8,6 +8,6 @@ export default axios.create({
     'Content-Type': 'application/x-www-form-urlencoded'
   },
   transformRequest: [function (data, headers) {
-    return qs.stringify(data, { arrayFormat: 'repeat' });
+    return qs.stringify(data, { arrayFormat: 'comma' });
   }],
 });

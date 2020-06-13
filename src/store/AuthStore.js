@@ -1,12 +1,12 @@
 import {observable, action} from 'mobx';
 import AsyncStorage from '@react-native-community/async-storage';
 import moment from 'moment';
-import axios from '../Api';
-import {T} from '../helpers';
-import { API_USERNAME, API_PASSWORD, TOKEN_CREDENTIALS } from '../../config';
+import axios from '~/Api';
+import {T} from '~/helpers';
+import { API_USERNAME, API_PASSWORD, TOKEN_CREDENTIALS } from '~/../config';
 
 // navigation service
-import NavigationService from '../NavigationService';
+import NavigationService from '~/NavigationService';
 
 
 class AuthStore{
@@ -30,16 +30,16 @@ class AuthStore{
         }
       );
 
-      this.token = data.value;
-      this.tokenExp = data.expiration;
+      this.token = data.access_token;
+      this.tokenExp = moment().add(data.expires_in, 'seconds').unix().toString();
 
 
-      AsyncStorage.setItem('token', data.value);
-      AsyncStorage.setItem('tokenExp', data.expiration);
+      AsyncStorage.setItem('token', this.token);
+      AsyncStorage.setItem('tokenExp', this.tokenExp);
 
-      axios.defaults.headers.common['Authorization'] = `Bearer ${data.value}`;
+      axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
 
-      return data.value;
+      return this.token;
     }catch (e) {
       console.log(e);
     }
@@ -50,8 +50,8 @@ class AuthStore{
       const token = await AsyncStorage.getItem('token');
       const tokenExp = await AsyncStorage.getItem('tokenExp');
 
-      const format = 'MMM D, YYYY h:m:s A';
-      const isExpired = moment(tokenExp, format) < moment();
+
+      const isExpired = moment().unix() > tokenExp;
 
       if (!token || !tokenExp || isExpired ) {
         await this.getToken();
@@ -67,9 +67,8 @@ class AuthStore{
         // Check is it get token request
         if(options.url !== 'oauth/token'){
           // Check is token expired
-          if(moment(the.tokenExp, format) < moment()){
+          if(the.tokenExp < moment()){
             const token = await the.getToken();
-            console.log(token);
             options.headers['Authorization'] = `Bearer ${token}`;
           }
 
@@ -96,6 +95,20 @@ class AuthStore{
         NavigationService.navigate('App')
       }else{
         NavigationService.navigate('Auth')
+      }
+
+    }catch (e) {
+      console.log(e);
+    }
+  }
+
+  @action setCapabilities(canTakeOrder, hasCategory){
+    try{
+
+      this.user = {
+        ...this.user,
+        canTakeOrder,
+        hasCategory
       }
 
     }catch (e) {

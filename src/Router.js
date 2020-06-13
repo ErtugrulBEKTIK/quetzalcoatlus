@@ -1,74 +1,40 @@
 import React from 'react';
-import {Icon} from "native-base";
-import BasketIcon from "~/components/BasketIcon";
-import { res } from './helpers';
 
 import {
-  createAppContainer, createBottomTabNavigator,
-  createDrawerNavigator,
+  createAppContainer,
   createSwitchNavigator
 } from 'react-navigation';
 
 
-import Redirector from './screens/AuthStack/Redirector';
+import AuthCheck from './screens/AuthCheck';
+import UserTypeCheck from './screens/UserTypeCheck';
+import Costumer from './screens/Costumer';
+import Waiter from './screens/Waiter';
+import Cook from './screens/Cook';
 
 // Stacks & Screens
-import AuthStack from './screens/AuthStack';
-import CompanyStack from './screens/CompanyStack';
-import CartStack from './screens/CartStack';
-import FavoriteStack from './screens/FavoriteStack';
-import ProfileStack from './screens/ProfileStack';
-import OrderStack from './screens/OrderStack';
+import Auth from './screens/Auth';
 
-
-const App = createBottomTabNavigator({
-  Companies: {
-    screen: CompanyStack,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor }) => <Icon name="search" style={{ color: tintColor, marginTop: res(5) }} />
-    }
+const App = createSwitchNavigator(
+  {
+    UserTypeCheck,
+    Costumer,
+    Waiter,
+    Cook
   },
-  Order: {
-    screen: OrderStack,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor }) => <Icon type='FontAwesome' name="qrcode" style={{ color: tintColor, marginTop: res(5) }} />,
-    }
-  },
-  Cart: {
-    screen: CartStack,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor }) => <BasketIcon tintColor={tintColor}/>
-    }
-  },
-  Favorites: {
-    screen: FavoriteStack,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor }) => <Icon name="heart" style={{ color: tintColor, marginTop: res(5) }} />
-    }
-  },
-  Profile: {
-    screen: ProfileStack,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor }) => <Icon type='MaterialIcons' name="person" style={{ color: tintColor, marginTop: res(5) }} />
-    }
+  {
+    initialRouteName: 'UserTypeCheck',
   }
-}, {
-  initialRouteName: 'Companies',
-  tabBarOptions: {
-    activeTintColor: '#00ACAC',
-    inactiveTintColor: '#005454',
-    showLabel: false
-  }
-});
+);
 
 const SwitchNavigator = createSwitchNavigator(
   {
-    Redirector,
+    AuthCheck,
     App,
-    Auth: AuthStack,
+    Auth,
   },
   {
-    initialRouteName: 'Redirector',
+    initialRouteName: 'AuthCheck',
   }
 );
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import Router from './src/Router';
 import NavigationService from './src/NavigationService';
 

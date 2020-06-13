@@ -63,6 +63,7 @@ class CartStore{
         userId,
         tableId: this.tableId,
         mealId: [],
+        menuId: []
       };
 
       this.cartList.map((item) => {
