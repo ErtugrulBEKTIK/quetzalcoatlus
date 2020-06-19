@@ -37,8 +37,8 @@ export default class SignInForm extends Component {
     return (
       <Formik
         initialValues={{
-          username: 'deneme3',
-          password: '123456'
+          username: '',
+          password: ''
         }}
         onSubmit={this._handleSubmit}
         validationSchema={validations}

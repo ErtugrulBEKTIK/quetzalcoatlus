@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, Image, View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Platform} from 'react-native';
+import {Text, Image, View, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform} from 'react-native';
 import s from './styles';
 
 import SignInForm from './SignInForm';
@@ -14,20 +14,28 @@ export default class SignIn extends Component {
 
   render() {
     return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={s.container}>
+
         <View style={s.headBackground} />
-        <KeyboardAvoidingView behavior={"padding"} enabled={Platform.OS === 'ios'}>
-          <View style={s.logoContainer}>
-            <Image style={s.logo} source={require('~/assets/images/logo.png')}/>
-          </View>
-          <ScrollView contentContainerStyle={s.scrollView}>
-            <View style={s.loginArea}>
-              <Text style={s.loginAreaTitle}>Giriş Yap</Text>
-              <SignInForm/>
+
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}}>
+
+            <View style={s.inner}>
+              <View style={s.logoContainer}>
+                <Image style={s.logo} source={require('~/assets/images/logo.jpg')}/>
+                <Text style={s.logoText} >ESİNTİ</Text>
+              </View>
+              <View style={s.loginArea}>
+                <Text style={s.loginAreaTitle}>Giriş Yap</Text>
+                <SignInForm/>
+              </View>
             </View>
-          </ScrollView>
+
         </KeyboardAvoidingView>
+
       </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

@@ -10,13 +10,13 @@ import { inject, observer } from 'mobx-react';
 export default class extends Component {
 
   render() {
-    const {id, title, fee, count, image} = this.props.item;
+    const {id, title, fee, count, url} = this.props.item;
     return (
       <View style={s.itemContainer}>
         <View style={s.imageContainer}>
           <Image
             style={s.image}
-            source={{uri: image}}
+            source={{uri: url}}
           />
         </View>
         <View style={s.textContainer}>

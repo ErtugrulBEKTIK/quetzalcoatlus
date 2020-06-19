@@ -17,6 +17,7 @@ export default class OrderList extends Component {
     orderList: [],
     total: 0,
     loading: true,
+    refreshing: false
   };
 
   componentWillMount() {
@@ -27,81 +28,98 @@ export default class OrderList extends Component {
 
   getOrderList = async () => {
     try{
-      this.setState({loading: true});
-      const {data} = await axios.post('api/orders', {
-        tableId: this.props.CartStore.tableId
-      });
+      const {tableId} = this.props.CartStore;
 
-      const lng = 'tr_TR';
-      let menu = [];
-      let total = 0;
+      if(tableId){
+        const {data} = await axios.post('api/orders', {
+          tableId
+        });
 
-      for (const section of data) {
-        let newSection = {
-          ...section,
-          data: []
-        };
-        total += section.totalFee;
+        const lng = 'tr_TR';
+        let generalMenu = [];
+        let total = 0;
 
-        // Set menu items according to language
-        for (const {meal} of section.orderMeals) {
-          const foundedMeal = _.find(newSection.data, { 'id': meal.id });
+        for (const section of data) {
+          let newSection = {
+            ...section,
+            data: []
+          };
+          total += section.totalFee;
 
-          if(foundedMeal){
-            foundedMeal.count ++;
-          }else {
-            let newMeal = {
-              ...meal,
-              title: '',
-              count: 1,
-            };
+          // Set menu items according to language
+          for (const {menu} of section.orderMenuList) {
 
-            meal.mealInLangList.map((rawTitle) => {
-              if (rawTitle.language.languageTag === lng) {
-                newMeal.title = rawTitle.name;
-              }
-            });
+            const foundedMeal = _.find(newSection.data, { 'id': menu.id });
+            if(foundedMeal){
+              foundedMeal.count ++;
+            }else {
+              let newMeal = {
+                ...menu,
+                title: '',
+                count: 1,
+              };
 
-            newSection.data.push(newMeal);
+
+              menu.menuInLangList.map((rawTitle) => {
+                if (rawTitle.language.languageTag === lng) {
+                  newMeal.title = rawTitle.name;
+                }
+              });
+
+              newSection.data.push(newMeal);
+            }
           }
+
+          generalMenu.push(newSection);
         }
 
-        menu.push(newSection);
+        this.setState({
+          orderList: generalMenu,
+          total,
+          loading: false,
+          refreshing: false
+        });
+
       }
-
-      this.setState({
-        orderList: menu,
-        total,
-        loading: false
-      });
-
 
 
     }catch (e) {
-      console.log(e);
+      console.log(e.response);
     }
   };
 
   render() {
 
-    const { orderList, loading, total } = this.state;
+    const { orderList, loading, total, refreshing } = this.state;
 
     return (
       <Container style={s.container} loading={loading}>
         <Root>
-          <SectionList
-            sections={orderList.slice()}
-            keyExtractor={(item, index) => item + index}
-            stickySectionHeadersEnabled={false}
-            renderItem={({ item }) => <OrderItem {...this.props} item={item} />}
-            renderSectionHeader={({ section }) => <OrderDetail section={section}/>}
-          />
-          <View style={s.footer}>
-            <View style={s.total}>
-              <Text style={s.totalText}>Toplam</Text>
-              <Text style={s.totalAmount}>₺{total}</Text>
-            </View>
-          </View>
+          {
+            orderList.length > 0
+              ? <>
+                <SectionList
+                  sections={orderList.slice()}
+                  keyExtractor={(item, index) => item + index}
+                  stickySectionHeadersEnabled={false}
+                  refreshing={refreshing}
+                  onRefresh={() => {
+                    this.setState({refreshing: true});
+                    this.getOrderList()
+                  }}
+                  renderItem={({ item }) => <OrderItem {...this.props} item={item} />}
+                  renderSectionHeader={({ section }) => <OrderDetail section={section}/>}
+                />
+                <View style={s.footer}>
+                  <View style={s.total}>
+                    <Text style={s.totalText}>Toplam</Text>
+                    <Text style={s.totalAmount}>₺{total}</Text>
+                  </View>
+                </View>
+                </>
+              : <Text style={s.empty}> Henüz sipariş vermediniz.</Text>
+          }
+
         </Root>
       </Container>
     );
@@ -151,6 +169,11 @@ const s = StyleSheet.create({
     color: 'white',
     fontSize: res(20),
     fontWeight: '600'
+  },
+  empty: {
+    flex: 1,
+    textAlign: 'center',
+    marginTop: res(30)
   }
 
 });

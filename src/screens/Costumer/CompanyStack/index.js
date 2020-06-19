@@ -12,7 +12,7 @@ const CompanyStack = createStackNavigator({
   CompanyList: {
     screen: CompanyList,
     navigationOptions: ({ navigation }) => ({
-      title: 'Quetzal Coatlus',
+      title: 'Esinti',
       headerStyle: {
         backgroundColor: '#00ACAC',
       },

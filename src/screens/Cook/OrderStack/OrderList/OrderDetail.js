@@ -2,26 +2,72 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import moment from 'moment';
 import {res} from "~/helpers";
+import axios from "~/Api";
 
 import { inject } from 'mobx-react';
+import {Spinner, Button} from "native-base";
 
 @inject('AuthStore')
 export default class extends Component {
+
+  state = {
+    sending: false,
+    onaylandi: false,
+    categoryId: null,
+    checkStatus: false
+  };
 
   checkStatus = (user, statuses) => {
     for(let cat of user.type.mealCategories){
 
       for (let status of statuses){
-        if(cat.id === status.mealCategory.id){
-          return true
+        if((cat.id === status.mealCategory.id) && (status.orderStatus === 'taken')){
+          this.setState({categoryId: status.mealCategory.id, checkStatus: true});
+
         }
       }
     }
-    return false;
+
   };
 
+  componentDidMount() {
+    const { user } = this.props.AuthStore;
+    const { orderStatuses} = this.props.section;
+    this.checkStatus(user, orderStatuses)
+  }
+
+
+  onayla = async () => {
+
+    try {
+
+      const { id } = this.props.section;
+      const { user } = this.props.AuthStore;
+      this.setState({sending: true});
+      await axios.post('api/advanceOrderStatus', {
+        userId: user.id,
+        orderId: id
+      });
+
+      this.props.section.orderStatuses.map((status) => {
+        if(status.mealCategory.id === this.state.categoryId){
+          status.orderStatus = 'ready'
+        }
+      })
+
+      this.setState({sending: false, onaylandi: true });
+
+
+    }catch (e) {
+      alert('Onaylama sırasında hata meydana geldi')
+      console.log(e);
+    }
+
+
+  }
+
   render() {
-    const { orderStatuses, takenTime, user: waiter } = this.props.section;
+    const { orderStatuses, takenTime, user: waiter, id } = this.props.section;
     const statusList = {
       taken: 'Sipariş alındı',
       ready: 'Hazır',
@@ -66,10 +112,14 @@ export default class extends Component {
           <View style={s.statusControlContainer}>
 
             {
-              this.checkStatus(user, orderStatuses) &&
-              <TouchableOpacity style={s.button}>
-                <Text style={s.buttonText}>Onayla</Text>
-              </TouchableOpacity>
+              (this.state.checkStatus && !this.state.onaylandi) &&
+              <Button onPress={this.onayla} style={s.button}>
+                { this.state.sending
+                  ? <Spinner size={'small'} color={'white'} />
+                  : <Text style={s.buttonText}>Onayla</Text>
+                }
+
+              </Button>
             }
 
           </View>
@@ -87,7 +137,9 @@ const s = StyleSheet.create({
   },
   button: {
     flex: 1,
+    flexDirection: 'row',
     padding: res(5),
+    height: res(30),
     backgroundColor: '#005656',
     borderRadius: res(5),
     justifyContent: 'center'

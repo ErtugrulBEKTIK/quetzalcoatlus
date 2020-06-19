@@ -52,7 +52,6 @@ export default class Menu extends Component {
           let newMeal = {
             ...meal,
             title: '',
-            image: await this.getMealPhoto(meal.id)
           };
 
           meal.menuInLangList.map((rawTitle) => {
@@ -130,7 +129,7 @@ const s = StyleSheet.create({
     flex: 1,
   },
   header: {
-    fontSize: 32,
+    fontSize: res(25),
     marginHorizontal: res(10),
     marginTop: res(20),
     color: '#000'

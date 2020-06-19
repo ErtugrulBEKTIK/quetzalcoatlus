@@ -1,5 +1,6 @@
 import React from "react";
 import {createBottomTabNavigator} from "react-navigation";
+import {Platform} from "react-native";
 import {Icon} from "native-base";
 import {res} from '~/helpers';
 
@@ -34,6 +35,7 @@ const Auth = createBottomTabNavigator(
   {
     initialRouteName: 'SignIn',
     tabBarOptions: {
+      keyboardHidesTabBar: Platform.OS !== 'ios',
       activeTintColor: '#fff',
       inactiveTintColor: '#64867a',
       style: {

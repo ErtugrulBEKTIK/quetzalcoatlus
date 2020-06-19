@@ -19,18 +19,24 @@ const s = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  scrollView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   logo: {
     height: res(120),
     resizeMode: "contain",
   },
+  logoText: {
+    fontWeight: 'bold',
+    fontSize: res(16),
+    color: '#005656'
+  },
+  inner: {
+    justifyContent: "flex-end",
+    marginBottom: res(20)
+  },
   loginArea: {
-    marginHorizontal: 'auto',
-    width: res(300),
-    marginTop: res(50),
+    width: '90%',
+    marginHorizontal: '5%',
+    marginTop: res(30),
     backgroundColor: '#fff',
     padding: res(20),
     borderRadius: res(5),
@@ -41,7 +47,6 @@ const s = StyleSheet.create({
       width:0,
       height: res(2)
     },
-    flex: 1,
     elevation: 4
   },
   loginAreaTitle: {

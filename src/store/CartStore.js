@@ -62,13 +62,12 @@ class CartStore{
       let postData = {
         userId,
         tableId: this.tableId,
-        mealId: [],
         menuId: []
       };
 
       this.cartList.map((item) => {
         for(let i = 1; i <= item.count; i++){
-          postData.mealId.push(item.id)
+          postData.menuId.push(item.id)
         }
       });
 

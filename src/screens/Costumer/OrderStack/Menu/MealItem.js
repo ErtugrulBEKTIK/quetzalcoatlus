@@ -101,7 +101,7 @@ export default class MealItem extends Component {
 
   render(){
     const { item, CartStore } = this.props;
-    const {title, fee, image } = item;
+    const {title, fee, url } = item;
     const {detailModal} = this.state;
 
     return (
@@ -115,7 +115,7 @@ export default class MealItem extends Component {
         <View style={s.imageContainer}>
           <Image
             style={s.image}
-            source={{uri: image}}
+            source={{uri: url}}
           />
         </View>
         <View style={s.textContainer}>
@@ -194,7 +194,6 @@ const s = StyleSheet.create({
     color: '#00ACAC'
   },
   addButton: {
-    width: res(50),
     height: res(30),
     padding: res(5),
     marginLeft: res(10),

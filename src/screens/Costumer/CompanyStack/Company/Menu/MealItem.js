@@ -176,7 +176,6 @@ const s = StyleSheet.create({
     color: '#00ACAC'
   },
   addButton: {
-    width: res(50),
     height: res(30),
     padding: res(5),
     marginLeft: res(10),

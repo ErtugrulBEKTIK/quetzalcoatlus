@@ -5,7 +5,7 @@ import {res} from "~/helpers";
 export default class extends Component {
 
   render() {
-    const {id, title, fee, count, image} = this.props.item;
+    const {id, title, fee, count} = this.props.item;
     return (
       <View style={s.itemContainer}>
 

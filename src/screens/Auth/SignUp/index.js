@@ -52,6 +52,7 @@ export default class SignUp extends Component {
               }
 
             </View>
+            <View style={{marginTop: 300}}/>
           </ScrollView>
         </KeyboardAvoidingView>
       </View>

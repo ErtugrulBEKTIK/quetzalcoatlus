@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text,TouchableOpacity, FlatList, View, Dimensions} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, FlatList, View, Dimensions, SectionList} from 'react-native';
 import {res} from "~/helpers";
 import CartItem from './CartItem';
 import { inject, observer } from 'mobx-react';
+import OrderItem from "~/screens/Costumer/CartStack/OrderList/OrderItem";
+import OrderDetail from "~/screens/Costumer/CartStack/OrderList/OrderDetail";
+import {Root} from "native-base";
 
 @inject('AuthStore', 'CartStore')
 @observer
@@ -24,21 +27,29 @@ export default class ItemList extends Component {
 
     return (
       <View style={s.container}>
-        <FlatList
-          style={s.flatList}
-          data={cartList}
-          keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => <CartItem item={item} />}
-        />
-        <View style={s.footer}>
-          <View style={s.total}>
-            <Text style={s.totalText}>Toplam</Text>
-            <Text style={s.totalAmount}>₺{total}</Text>
-          </View>
-          <TouchableOpacity onPress={() => { this.props.CartStore.order(this.props.AuthStore.user.id) }} style={s.orderButton}>
-            <Text style={s.orderText}>Siparişi Tamamla</Text>
-          </TouchableOpacity>
-        </View>
+        {
+          cartList.length > 0
+            ? <>
+              <FlatList
+                style={s.flatList}
+                data={cartList}
+                keyExtractor={(item, index) => item + index}
+                renderItem={({ item }) => <CartItem item={item} />}
+              />
+              <View style={s.footer}>
+                <View style={s.total}>
+                  <Text style={s.totalText}>Toplam</Text>
+                  <Text style={s.totalAmount}>₺{total}</Text>
+                </View>
+                <TouchableOpacity onPress={() => { this.props.CartStore.order(this.props.AuthStore.user.id) }} style={s.orderButton}>
+                  <Text style={s.orderText}>Siparişi Tamamla</Text>
+                </TouchableOpacity>
+              </View>
+            </>
+            : <Text style={s.empty}> Henüz sepete yiyecek eklemediniz.</Text>
+        }
+
+
       </View>
     );
   }
@@ -86,6 +97,11 @@ const s = StyleSheet.create({
     color: 'white',
     fontSize: res(20),
     fontWeight: '600'
+  },
+  empty: {
+    flex: 1,
+    textAlign: 'center',
+    marginTop: res(30)
   }
 
 });

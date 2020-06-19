@@ -34,8 +34,7 @@ class MealStore{
           const mapPromisses2 = section.menuList.map(async (meal) => {
             let newMeal = {
               ...meal,
-              title: '',
-              image: await getMenuPhoto(meal.id)
+              title: ''
             };
 
             meal.menuInLangList.map((rawTitle) => {
