@@ -23,7 +23,7 @@ const CompanyHeader = ({ navigation }) => {
 
 const s = StyleSheet.create({
   container: {
-    backgroundColor: '#00ACAC',
+    backgroundColor: '#003d58',
     height: res(230),
   },
   imageBackground: {

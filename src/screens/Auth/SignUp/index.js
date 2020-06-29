@@ -29,14 +29,14 @@ export default class SignUp extends Component {
             <Button
               first
               onPress={() => {this.setState({individualForm: true}) }}
-              style={[style.segmentButton, {backgroundColor: individualForm  ?  '#005656' : 'white' }]}>
-              <Text style={{color: individualForm ?  'white' : '#005656'}}>Bireysel</Text>
+              style={[style.segmentButton, {backgroundColor: individualForm  ?  '#003d58' : 'white' }]}>
+              <Text style={{color: individualForm ?  'white' : '#003d58'}}>Bireysel</Text>
             </Button>
             <Button
               last
               onPress={() => {this.setState({individualForm: false}) }}
-              style={[style.segmentButton, {backgroundColor: individualForm ? 'white' : '#005656' }]}>
-              <Text style={{color: individualForm ?  '#005656' : 'white'}}>Restorant</Text>
+              style={[style.segmentButton, {backgroundColor: individualForm ? 'white' : '#003d58' }]}>
+              <Text style={{color: individualForm ?  '#003d58' : 'white'}}>Restorant</Text>
             </Button>
           </Segment>
         </View>
@@ -64,10 +64,10 @@ export default class SignUp extends Component {
 
 const style = StyleSheet.create({
   segmentContainer: {
-    borderColor: '#005656',
+    borderColor: '#f79b2e',
   },
   segment: {
-    backgroundColor: '#b5f3e5',
+    backgroundColor: '#f79b2e',
     borderColor: '#005656',
   },
   segmentButton: {

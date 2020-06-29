@@ -13,6 +13,7 @@ import Terms from '../Terms';
 import {inject} from 'mobx-react';
 import {StyleSheet} from "react-native";
 import _ from "lodash";
+import SmsConfirmation from "~/screens/Auth/SignUp/SmsConfirmation";
 
 @inject('AuthStore')
 export default class SignUpForm extends Component {
@@ -20,8 +21,11 @@ export default class SignUpForm extends Component {
   state = {
     types: [],
     loading: true,
-    termsModal: false
+    termsModal: false,
+    smsConfirm:false,
+    userName: '',
   }
+
 
   componentDidMount() {
     this.getCompanyTypes()
@@ -63,7 +67,7 @@ export default class SignUpForm extends Component {
       bag.setSubmitting(false);
       bag.resetForm({});
 
-      alert('Kayıt Başarılı');
+      this.setState({smsConfirm:true, userName:data.username})
 
     }catch (e) {
       bag.setSubmitting(false);
@@ -71,6 +75,10 @@ export default class SignUpForm extends Component {
       alert('Kayıt başarısız tekrar deneyin.');
     }
   };
+
+  setSignUpSmsConfirm = (smsConfirm) => {
+    this.setState({smsConfirm:smsConfirm})
+  }
 
 
   render() {
@@ -136,21 +144,7 @@ export default class SignUpForm extends Component {
 
                 { (errors.companyName && touched.companyName) && <Icon style={{fontSize: res(17)}} name='close-circle' />}
               </Item>
-              <Item error={errors.phoneNumber && touched.phoneNumber}
-                    floatingLabel
-                    style={{marginTop: res(10)}}>
-                <Label>Telefon</Label>
-                <Input
-                  getRef={ref => this.phoneRef = ref}
-                  returnKeyType={'next'}
-                  onSubmitEditing={() => this.usernameRef._root.focus()}
-                  onChangeText={handleChange('phoneNumber')}
-                  value={values.phoneNumber}
-                  onBlur={() => setFieldTouched('phoneNumber')}
-                />
 
-                { (errors.phoneNumber && touched.phoneNumber) && <Icon style={{fontSize: res(17)}} name='close-circle' />}
-              </Item>
               <Item error={errors.username && touched.username}
                     floatingLabel
                     style={{marginTop: res(10)}}>
@@ -188,6 +182,23 @@ export default class SignUpForm extends Component {
                 { (errors.email && touched.email) && <Icon style={{fontSize: res(17)}} name='close-circle' />}
               </Item>
 
+              <Item error={errors.phoneNumber && touched.phoneNumber}
+                    floatingLabel
+                    style={{marginTop: res(10)}}>
+                <Label>Telefon Numarası</Label>
+                <Input
+                    getRef={ref => this.phoneRef = ref}
+                    returnKeyType={'next'}
+                    keyboardType='number-pad'
+                    onSubmitEditing={() => this.usernameRef._root.focus()}
+                    onChangeText={handleChange('phoneNumber')}
+                    value={values.phoneNumber}
+                    onBlur={() => setFieldTouched('phoneNumber')}
+                />
+
+                { (errors.phoneNumber && touched.phoneNumber) && <Icon style={{fontSize: res(17)}} name='close-circle' />}
+              </Item>
+
               <Item error={errors.password && touched.password}
                     floatingLabel
                     style={{marginTop: res(10)}}>
@@ -221,10 +232,11 @@ export default class SignUpForm extends Component {
                 disabled={!isValid || isSubmitting}
                 onPress={handleSubmit}
                 style={s.button}>
-
                 { isSubmitting && <Spinner size={'small'} color={'white'} /> }
-                <Text>Gönder</Text>
+                <Text>Devam</Text>
+
               </Button>
+              <SmsConfirmation userName={this.state.userName} smsConfirm={this.state.smsConfirm} setSignUpSmsConfirm={(smsConfirm) =>this.setSignUpSmsConfirm(smsConfirm)}></SmsConfirmation>
             </React.Fragment>
           )}
         </Formik>
@@ -237,7 +249,8 @@ export default class SignUpForm extends Component {
 const s = StyleSheet.create({
   button: {
     marginTop: res(30),
-    backgroundColor: '#005656'
+    backgroundColor: '#003d58',
+    borderRadius: res(5),
   },
   input: {
     height: res(40),

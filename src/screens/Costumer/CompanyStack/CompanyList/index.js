@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, TouchableOpacity, FlatList,
-  View, TextInput, Image } from 'react-native';
+  View, TextInput, Image, Button, } from 'react-native';
 import {Container} from '~/components/my-base';
 import NavigationService from "~/NavigationService";
 import ProgressBar from 'react-native-progress/Bar';
@@ -8,6 +8,7 @@ import axios from "~/Api";
 import {res, T} from "~/helpers";
 
 import { inject } from 'mobx-react';
+import {Icon} from "native-base";
 
 @inject('AuthStore')
 export default class CompanyList extends Component {
@@ -25,6 +26,7 @@ export default class CompanyList extends Component {
 
     this.getCompanies();
   }
+
 
   getCompanies = async () => {
     this.setState({
@@ -79,19 +81,13 @@ export default class CompanyList extends Component {
 
   };
 
-
   getBranchPhoto = async (id) => {
     try{
       const response = await axios.post('api/branchPhotograph', {
         branchId: id,
-      }, {
-        responseType: 'arraybuffer'
       });
-
-      const uri = 'data:image/png;base64,'+T.b2a(
-        new Uint8Array(response.data)
-          .reduce((data, byte) => data + String.fromCharCode(byte), '')
-      );
+      console.log(JSON.stringify(response));
+      const uri = response.data;
 
       return { uri }
     }catch (e) {
@@ -99,6 +95,16 @@ export default class CompanyList extends Component {
       return require('~/assets/images/no-image.jpg')
     }
   };
+
+  followBranch = async (branchId) => {
+    const { user } = this.props.AuthStore;
+
+    const {data} = await axios.post('api/followBranch',{
+      userIdWho: user.id,
+      branchIdWhom: branchId,
+    });
+    console.log(JSON.stringify(data));
+  }
 
   searchFilter = text => {
     const newData = this.state.allBranches.filter(item => {
@@ -143,6 +149,7 @@ export default class CompanyList extends Component {
             style={s.image}
             source={item.image}/>
           <ProgressBar
+            style={{borderRadius: res(5), marginTop: res(5)}}
             progress={capacity}
             borderRadius={0}
             height={10}
@@ -157,6 +164,13 @@ export default class CompanyList extends Component {
             item.address && <Text style={s.detail}>{item.address.country} / {item.address.quarter.name}</Text>
           }
           <Text style={s.detail}>{item.phoneNumber}</Text>
+          <View>
+          <TouchableOpacity transparent
+                            onPress={() => this.followBranch(item.branchId)}
+          >
+            <Icon name="heart" style={{fontSize: 20, color: 'red'}} />
+          </TouchableOpacity>
+          </View>
         </View>
       </TouchableOpacity>
     )
@@ -166,7 +180,7 @@ export default class CompanyList extends Component {
     const { branches, loading} = this.state;
 
     return (
-      <Container scroll loading={loading}>
+      <Container scroll loading={loading} >
         <FlatList
           ListHeaderComponent={this.renderHeader}
           renderItem={this.renderItem}
@@ -200,15 +214,19 @@ const s = StyleSheet.create({
     flexDirection: 'row',
     margin: res(10),
     borderWidth: res(1),
-    borderColor: '#ddd',
-    borderRadius: res(5)
+    borderColor: '#dddddd',
+    borderRadius: res(5),
+    backgroundColor: '#ffffff'
   },
   imageContainer: {
     justifyContent: 'space-around',
+    borderRadius: res(5),
+    padding: res(5)
   },
   image: {
     width: res(90),
     height: res(90),
+    borderRadius: res(5),
   },
   textContainer: {
     flex: 1,

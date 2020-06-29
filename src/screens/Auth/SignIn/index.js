@@ -23,11 +23,10 @@ export default class SignIn extends Component {
 
             <View style={s.inner}>
               <View style={s.logoContainer}>
-                <Image style={s.logo} source={require('~/assets/images/logo.jpg')}/>
-                <Text style={s.logoText} >ESİNTİ</Text>
+                <Image style={s.logo} source={require('~/assets/images/logo1.png')}/>
               </View>
               <View style={s.loginArea}>
-                <Text style={s.loginAreaTitle}>Giriş Yap</Text>
+
                 <SignInForm/>
               </View>
             </View>

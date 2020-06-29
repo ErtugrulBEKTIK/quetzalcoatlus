@@ -11,10 +11,18 @@ import validations from './validations';
 import {inject} from 'mobx-react';
 import {StyleSheet} from "react-native";
 import Terms from "~/screens/Auth/SignUp/Terms";
+import SmsConfirmation from "~/screens/Auth/SignUp/SmsConfirmation";
 
 @inject('AuthStore')
 export default class SignUpForm extends Component {
+
+    state = {
+        smsConfirm:false,
+        userName: '',
+    }
+
   _handleSubmit = async (data, bag) => {
+      console.log(JSON.stringify(data));
     try {
       const response = await axios.post('api/registerPersonal',
         data
@@ -22,7 +30,8 @@ export default class SignUpForm extends Component {
       bag.setSubmitting(false);
       bag.resetForm({});
 
-      alert('Kayıt Başarılı');
+      this.setState({smsConfirm:true, userName:data.username})
+
 
     }catch (e) {
       bag.setSubmitting(false);
@@ -31,8 +40,14 @@ export default class SignUpForm extends Component {
     }
   };
 
+    setSignUpSmsConfirm = (smsConfirm) => {
+        this.setState({smsConfirm:smsConfirm})
+    }
+
 
   render() {
+      const { smsConfirm } = this.state;
+
     return (
       <Formik
         initialValues={{
@@ -40,6 +55,7 @@ export default class SignUpForm extends Component {
           surname: '',
           username: '',
           email: '',
+          phoneNumber: '',
           password: '',
           passwordConfirm: '',
           terms: false
@@ -126,6 +142,24 @@ export default class SignUpForm extends Component {
               { (errors.email && touched.email) && <Icon style={{fontSize: res(17)}} name='close-circle' />}
             </Item>
 
+              <Item error={errors.phoneNumber && touched.phoneNumber}
+                    floatingLabel
+                    style={{marginTop: res(10)}}>
+                  <Label>Telefon Numarası</Label>
+                  <Input
+                      returnKeyType={'next'}
+                      keyboardType='number-pad'
+                      onSubmitEditing={() => this.passwordRef._root.focus()}
+                      onChangeText={handleChange('phoneNumber')}
+                      value={values.phoneNumber}
+                      onBlur={() => setFieldTouched('phoneNumber')}
+                      autoCorrect={false}
+                      autoCapitalize={'none'}
+                  />
+
+                  { (errors.phoneNumber && touched.phoneNumber) && <Icon style={{fontSize: res(17)}} name='close-circle' />}
+              </Item>
+
             <Item error={errors.password && touched.password}
                   floatingLabel
                   style={{marginTop: res(10)}}>
@@ -177,8 +211,10 @@ export default class SignUpForm extends Component {
               style={s.button}>
 
               { isSubmitting && <Spinner size={'small'} color={'white'} /> }
-              <Text>Gönder</Text>
+              <Text>Devam</Text>
             </Button>
+              <SmsConfirmation userName={this.state.userName} smsConfirm={this.state.smsConfirm} setSignUpSmsConfirm={(smsConfirm) =>this.setSignUpSmsConfirm(smsConfirm)}></SmsConfirmation>
+
           </React.Fragment>
         )}
       </Formik>
@@ -189,6 +225,7 @@ export default class SignUpForm extends Component {
 const s = StyleSheet.create({
   button: {
     marginTop: res(30),
-    backgroundColor: '#005656'
+    backgroundColor: '#003d58',
+    borderRadius: res(5),
   },
 });

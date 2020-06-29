@@ -21,7 +21,7 @@ export default class SignInForm extends Component {
           password,
         }
       );
-
+      console.log(JSON.stringify("login cevabı" + data))
       bag.setSubmitting(false);
 
       this.props.AuthStore.login(data);
@@ -109,6 +109,7 @@ export default class SignInForm extends Component {
 const s = StyleSheet.create({
    button: {
      marginTop: res(30),
-     backgroundColor: '#005656'
+     backgroundColor: '#003d58',
+     borderRadius: res(5),
   },
 });

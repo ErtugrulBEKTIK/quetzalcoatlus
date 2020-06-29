@@ -14,12 +14,14 @@ const CompanyStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Esinti',
       headerStyle: {
-        backgroundColor: '#00ACAC',
+        backgroundColor: '#003d58',
       },
       headerTitleStyle: {
         fontSize: res(20),
         flex: 1,
         textAlign: "center",
+        alignItems: 'center',
+        marginLeft: res(70)
       },
       headerBackTitle: ' ',
       headerTintColor: '#fff',

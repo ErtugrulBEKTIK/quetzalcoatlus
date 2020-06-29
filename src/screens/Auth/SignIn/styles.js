@@ -4,30 +4,35 @@ import {res} from "~/helpers";
 const s = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#f79b2e',
   },
   headBackground: {
     position: 'absolute',
-    top: 0,
+    top: -170,
     left: 0,
-    height: res(350),
+    height: res(300),
     width: '100%',
-    backgroundColor: '#b5f3e5'
+    backgroundColor: '#f79b2e',
+  //  borderRadius:150
   },
   logoContainer: {
     marginTop: res(70),
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#f79b2e',
+    borderRadius:90,
+    width: res(150),
+    marginLeft: res( 100)
   },
 
   logo: {
-    height: res(120),
+    height: res(200),
     resizeMode: "contain",
   },
   logoText: {
     fontWeight: 'bold',
     fontSize: res(16),
-    color: '#005656'
+    color: '#003d58'
   },
   inner: {
     justifyContent: "flex-end",
@@ -36,10 +41,10 @@ const s = StyleSheet.create({
   loginArea: {
     width: '90%',
     marginHorizontal: '5%',
-    marginTop: res(30),
+    marginTop: res(40),
     backgroundColor: '#fff',
     padding: res(20),
-    borderRadius: res(5),
+    borderRadius: res(10),
     shadowColor: 'black',
     shadowOpacity: .2,
     shadowRadius: res(3),
@@ -53,7 +58,7 @@ const s = StyleSheet.create({
     fontSize: res(20),
     marginBottom: res(30),
     textAlign: 'center',
-    color: '#005656',
+    color: '#ff4d01',
     fontWeight: 'bold'
   }
 });

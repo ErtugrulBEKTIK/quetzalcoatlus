@@ -68,8 +68,8 @@ class AuthStore{
         if(options.url !== 'oauth/token'){
           // Check is token expired
           if(the.tokenExp < moment()){
-            const token = await the.getToken();
-            options.headers['Authorization'] = `Bearer ${token}`;
+          //  const token = await the.getToken();
+          //  options.headers['Authorization'] = `Bearer ${token}`;
           }
 
         }
@@ -118,13 +118,16 @@ class AuthStore{
 
   @action async login(user){
     try{
+      console.log("login başladı");
       await AsyncStorage.setItem('user', JSON.stringify(user));
+      console.log("login bitti");
       this.user = user;
       NavigationService.navigate('App')
     }catch (e) {
       console.log(e);
     }
   }
+
 
   @action async logout(){
     try{

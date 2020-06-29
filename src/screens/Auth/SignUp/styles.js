@@ -4,7 +4,7 @@ import {res} from "~/helpers";
 const s = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#f79b2e',
   },
   headBackground: {
     position: 'absolute',
@@ -12,7 +12,7 @@ const s = StyleSheet.create({
     left: 0,
     height: res(350),
     width: '100%',
-    backgroundColor: '#b5f3e5'
+    backgroundColor: '#f79b2e'
   },
   logoContainer: {
     justifyContent: 'center',
@@ -47,7 +47,7 @@ const s = StyleSheet.create({
   loginAreaTitle: {
     fontSize: res(20),
     textAlign: 'center',
-    color: '#005656',
+    color: '#003d58',
     fontWeight: 'bold'
   }
 });

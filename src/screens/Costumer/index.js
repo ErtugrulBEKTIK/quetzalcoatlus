@@ -50,7 +50,7 @@ const Costumer = createBottomTabNavigator({
   initialRouteName: 'List',
   tabBarOptions: {
     activeTintColor: '#00ACAC',
-    inactiveTintColor: '#005454',
+    inactiveTintColor: '#003d58',
     showLabel: false
   }
 });

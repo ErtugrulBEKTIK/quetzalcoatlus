@@ -31,10 +31,10 @@ const CartStack = createMaterialTopTabNavigator({
       backgroundColor: 'white'
     },
     indicatorStyle: {
-      backgroundColor: '#00ACAC'
+      backgroundColor: '#003d58'
     },
     labelStyle: {
-      color: '#00ACAC',
+      color: '#003d58',
       fontWeight: '600'
     }
   }

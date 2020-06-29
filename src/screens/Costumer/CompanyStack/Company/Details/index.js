@@ -89,7 +89,7 @@ const s = StyleSheet.create({
   },
   slotIcon: {
     fontSize: res(24),
-    color: '#00ACAC',
+    color: '#003d58',
     width: res(25)
   },
   slotText: {

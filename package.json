@@ -42,9 +42,9 @@
     "@babel/plugin-proposal-decorators": "^7.7.0",
     "@babel/preset-flow": "^7.0.0",
     "@babel/runtime": "^7.7.2",
-    "babel-jest": "^24.9.0",
+    "babel-jest": "^26.1.0",
     "babel-plugin-root-import": "^6.5.0",
-    "jest": "^24.9.0",
+    "jest": "^26.1.0",
     "jetifier": "^1.6.4",
     "metro-react-native-babel-preset": "^0.57.0",
     "react-test-renderer": "16.8.3"

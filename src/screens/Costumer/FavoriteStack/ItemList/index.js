@@ -10,16 +10,78 @@ import {res, T} from "~/helpers";
 import FavoriteItem from './FavoriteItem';
 import { inject, observer } from 'mobx-react';
 
-@inject('CartStore')
-@observer
+@inject('AuthStore')
 export default class ItemList extends Component {
 
   state = {
     loading: true,
   };
 
+  async componentDidMount() {
+
+    await this.props.AuthStore.setupAuth();
+
+    this.getFollowingBranches();
+  }
+
+  getFollowingBranches = async () => {
+    this.setState({
+      loading: true,
+    });
+    const { user } = this.props.AuthStore;
+
+    try {
+      const {data} = await axios.post('api/followingBranches',{
+        userId: user.id
+      });
+      console.log(JSON.stringify(data));
+      let branches = [];
+      data.map((company) => {
+        branches = [...branches, ...company.branches];
+      });
+
+      // Setting Total and Available Capacity
+      let newBranches = [];
+      const mapPromisses = branches.map( async (branch) => {
+        let totalCapacity = 0;
+        let availableCapacity = 0;
+
+        branch.halls.map((hall) => {
+          hall.table.map((table) => {
+            if(table.active){
+              availableCapacity += table.capacity;
+            }
+
+            totalCapacity += table.capacity;
+          });
+        });
+
+        newBranches.push({
+          ...branch,
+          totalCapacity,
+          availableCapacity,
+          image: await this.getBranchPhoto(branch.id)
+        })
+      });
+
+      Promise.all(mapPromisses).then(() => {
+        this.setState({
+          companies: data,
+          branches: newBranches,
+          allBranches: newBranches,
+          loading: false,
+        });
+      });
+
+
+    }catch (e) {
+      console.log(e);
+    }
+
+  };
+
   render() {
-    const { cartList } = this.props.CartStore;
+   // const { cartList } = this.props.CartStore;
 
     return (
       <View style={s.container}>

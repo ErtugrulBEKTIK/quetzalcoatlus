@@ -19,7 +19,7 @@ const ProfileStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Menü',
       headerStyle: {
-        backgroundColor: '#00ACAC',
+        backgroundColor: '#003d58',
       },
       headerTitleStyle: {
         fontSize: res(20),

@@ -36,10 +36,10 @@ const Auth = createBottomTabNavigator(
     initialRouteName: 'SignIn',
     tabBarOptions: {
       keyboardHidesTabBar: Platform.OS !== 'ios',
-      activeTintColor: '#fff',
-      inactiveTintColor: '#64867a',
+      activeTintColor: '#ffffff',
+      inactiveTintColor: '#c5ded4',
       style: {
-        backgroundColor: '#005656'
+        backgroundColor: '#003d58'
       }
     }
   }
